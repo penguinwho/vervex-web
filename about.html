@@ -27,8 +27,25 @@
     .page-shell {
       width: 100%;
       max-width: 1120px;
+      min-width: 0;
       display: grid;
       gap: 1.75rem;
+    }
+
+    .page-shell > * {
+      width: 100%;
+      max-width: 100%;
+      min-width: 0;
+    }
+
+    .hero,
+    .values,
+    .story-grid,
+    .team-section,
+    .button-row,
+    .footer-bar,
+    .nav-links {
+      min-width: 0;
     }
 
     .site-header {
@@ -80,19 +97,28 @@
     }
 
     .hero {
-      padding: 2.2rem;
+      padding: 2.4rem 2rem;
       border-radius: 28px;
       background: #ffffff;
       border: 1px solid rgba(0,0,0,0.08);
       box-shadow: 0 30px 90px rgba(15,15,15,0.08);
-      text-align: center;
+      display: grid;
+      gap: 1.4rem;
       animation: fadeInUp 0.75s ease both;
+    }
+
+    .hero .eyebrow {
+      text-transform: uppercase;
+      letter-spacing: 0.28em;
+      font-size: 0.82rem;
+      color: #8c7e76;
+      font-weight: 700;
     }
 
     .hero h1 {
       font-family: "Bebas Neue", sans-serif;
-      font-size: clamp(3rem, 6vw, 4.5rem);
-      margin-bottom: 1rem;
+      font-size: clamp(3rem, 6vw, 4.2rem);
+      margin-bottom: 0.4rem;
       line-height: 0.95;
     }
 
@@ -100,37 +126,70 @@
       color: #5b5650;
       font-size: 1rem;
       line-height: 1.8;
-      max-width: 780px;
-      margin: 0 auto;
+      max-width: 760px;
+      margin: 0;
     }
 
-    .highlights {
+    .values {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
       gap: 1rem;
-      animation: fadeInUp 0.8s ease both;
+      width: 100%;
+      min-width: 0;
+      animation: fadeInUp 0.85s ease both;
       animation-delay: 0.1s;
     }
 
-    .highlight-card {
+    .value-card {
       background: #ffffff;
       border: 1px solid rgba(0,0,0,0.08);
       border-radius: 24px;
-      padding: 1.5rem;
+      padding: 1.6rem;
+      box-shadow: 0 18px 45px rgba(15,15,15,0.06);
+      min-height: 200px;
+    }
+
+    .value-card strong {
+      display: block;
+      margin-bottom: 0.9rem;
+      color: #1a1510;
+      font-size: 1.05rem;
+    }
+
+    .value-card p {
+      color: #6a6360;
+      line-height: 1.75;
+      font-size: 0.96rem;
+    }
+
+    .story-grid {
+      display: grid;
+      grid-template-columns: 1.3fr 0.9fr;
+      gap: 1rem;
+      width: 100%;
+      min-width: 0;
+      animation: fadeInUp 0.85s ease both;
+      animation-delay: 0.12s;
+    }
+
+    .story-card {
+      background: #ffffff;
+      border: 1px solid rgba(0,0,0,0.08);
+      border-radius: 24px;
+      padding: 1.8rem;
       box-shadow: 0 18px 45px rgba(15,15,15,0.06);
     }
 
-    .highlight-card strong {
-      display: block;
+    .story-card h3 {
       margin-bottom: 0.85rem;
+      font-size: 1.2rem;
       color: #1a1510;
-      font-size: 1rem;
     }
 
-    .highlight-card p {
+    .story-card p {
       color: #6a6360;
-      line-height: 1.7;
-      font-size: 0.96rem;
+      line-height: 1.75;
+      font-size: 0.97rem;
     }
 
     .team-section {
@@ -145,7 +204,7 @@
 
     .team-section h2 {
       font-family: "Bebas Neue", sans-serif;
-      font-size: clamp(2rem, 5vw, 3rem);
+      font-size: clamp(2rem, 4.5vw, 3rem);
       margin-bottom: 0.8rem;
       text-align: center;
     }
@@ -167,11 +226,11 @@
       display: flex;
       gap: 1rem;
       padding: 0.5rem 0;
-      animation: slide 24s linear infinite;
+      animation: slide 14s linear infinite;
     }
 
     .team-card {
-      min-width: 220px;
+      min-width: 240px;
       background: #ffffff;
       border: 1px solid rgba(0,0,0,0.08);
       border-radius: 24px;
@@ -276,6 +335,61 @@
       .team-slider {
         animation-duration: 28s;
       }
+
+      .story-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      body {
+        padding: 1.2rem 0.75rem;
+      }
+
+      .page-shell {
+        gap: 1.1rem;
+      }
+
+      .site-header {
+        padding: 0.85rem 1rem;
+      }
+
+      .hero,
+      .story-card,
+      .value-card,
+      .team-section,
+      .footer-bar {
+        border-radius: 22px;
+        padding: 1.3rem;
+      }
+
+      .hero h1 {
+        font-size: clamp(2.5rem, 10vw, 3.6rem);
+      }
+
+      .values {
+        grid-template-columns: 1fr;
+      }
+
+      .button-row {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .button-row a {
+        width: 100%;
+      }
+
+      .team-slider {
+        flex-wrap: wrap;
+        justify-content: center;
+        animation: none;
+      }
+
+      .team-card {
+        min-width: auto;
+        width: 100%;
+      }
     }
   </style>
 </head>
@@ -292,28 +406,40 @@
     </header>
 
     <section class="hero">
-      <h1>About Vervex</h1>
-      <p>We are a small team making simple, privacy-focused web experiences and stay honest to our community.</p>
+      <div class="eyebrow">Modern web for people</div>
+      <h1>Driven by clarity, built for today.</h1>
+      <p>Vervex designs websites that feel polished, load fast, and keep visitors in control. We focus on modern desktop and mobile experiences without clutter, trackers, or outdated layouts.</p>
     </section>
 
-    <section class="highlights">
-      <div class="highlight-card">
-        <strong>Simple by design</strong>
-        <p>Every page is built to feel clean, calm, and easy to navigate without distractions.</p>
+    <section class="values">
+      <div class="value-card">
+        <strong>Modern craftsmanship</strong>
+        <p>Every page is tuned to look sharp and perform smoothly on today's browsers and screens.</p>
       </div>
-      <div class="highlight-card">
-        <strong>Privacy first</strong>
-        <p>We avoid unnecessary tracking and intrusive popups, keeping the experience respectful and transparent.</p>
+      <div class="value-card">
+        <strong>Privacy-first thinking</strong>
+        <p>We avoid hidden trackers and invasive ads, so your site feels reliable and respectful.</p>
       </div>
-      <div class="highlight-card">
-        <strong>Desktop + mobile ready</strong>
-        <p>Designed for smooth performance on modern desktop and mobile browsers.</p>
+      <div class="value-card">
+        <strong>Simple, not basic</strong>
+        <p>Clean layouts, purposeful content, and polished interaction details make each visit feel premium.</p>
+      </div>
+    </section>
+
+    <section class="story-grid">
+      <div class="story-card">
+        <h3>Why we exist</h3>
+        <p>Vervex exists to make small websites feel intentional again. When every page is designed with care, visitors get a better, faster, more confident browsing experience.</p>
+      </div>
+      <div class="story-card">
+        <h3>How we work</h3>
+        <p>We keep designs light, content clear, and updates easy. That way the site stays useful, fast, and friendly whether someone visits from a phone or a laptop.</p>
       </div>
     </section>
 
     <section class="team-section">
       <h2>Meet the team</h2>
-      <p>Vervex is created by a small group of builders who care about privacy, simplicity, and the open web.</p>
+      <p>Vervex is run by a small, close-knit group who care about quality, simplicity, and staying true to the open web.</p>
       <div class="team-slider-wrapper">
         <div class="team-slider">
           <div class="team-card">
@@ -331,6 +457,14 @@
           <div class="team-card">
             <strong>downstairs room in my house</strong>
             <span>CTO</span>
+          </div>
+          <div class="team-card">
+            <strong>Penguin Who</strong>
+            <span>Frontend Developer</span>
+          </div>
+          <div class="team-card">
+            <strong>Muaves</strong>
+            <span>Co-owner / Visual Designer</span>
           </div>
         </div>
       </div>
