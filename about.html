@@ -13,165 +13,244 @@
       margin: 0;
       padding: 0;
     }
+
     body {
-      background: radial-gradient(circle at top, rgba(255,255,255,0.95), #f9f6f2 58%);
-      color: #1a1510;
-      font-family: "DM Sans", sans-serif;
       min-height: 100vh;
+      font-family: "DM Sans", sans-serif;
+      background: radial-gradient(circle at top, rgba(255,255,255,0.96), #f9f6f2 60%);
       display: flex;
-      align-items: center;
       justify-content: center;
-      padding: 2rem;
-      text-align: center;
-    }
-    .card {
-      max-width: 760px;
-      width: 100%;
-      background: rgba(255,255,255,0.95);
-      border: 1px solid rgba(0,0,0,0.08);
-      border-radius: 28px;
-      box-shadow: 0 25px 80px rgba(15,15,15,0.08);
-      padding: 3rem;
-      opacity: 0;
-      transform: translateY(18px);
-      animation: fadeInUp 0.75s ease-out both;
-    }
-    h1 {
-      font-family: "Bebas Neue", sans-serif;
-      font-size: clamp(3rem, 7vw, 4.5rem);
-      margin-bottom: 1.2rem;
-    }
-    p {
-      color: #5b5650;
-      line-height: 1.8;
-      margin-bottom: 1.5rem;
-      font-size: 1rem;
-    }
-    .home-link {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 0.95rem 2rem;
-      border-radius: 999px;
-      background: #1a1510;
-      color: #fff;
-      text-decoration: none;
-      font-weight: 700;
-      transition: transform 0.2s ease, opacity 0.2s ease;
-    }
-
-    .about-highlights {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 1rem;
-      margin-top: 2rem;
-      text-align: left;
-    }
-
-    .about-card {
-      background: #ffffff;
-      border: 1px solid rgba(0,0,0,0.08);
-      border-radius: 22px;
-      padding: 1.4rem;
-      box-shadow: 0 18px 40px rgba(15,15,15,0.05);
-    }
-
-    .about-card strong {
-      display: block;
-      margin-bottom: 0.75rem;
-      font-size: 1rem;
+      padding: 2rem 1rem;
       color: #1a1510;
     }
 
-    .about-card p {
-      color: #6a6360;
-      line-height: 1.6;
+    .page-shell {
+      width: 100%;
+      max-width: 1120px;
+      display: grid;
+      gap: 1.75rem;
+    }
+
+    .site-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      padding: 0.9rem 1.2rem;
+      border: 1px solid rgba(0,0,0,0.08);
+      border-radius: 20px;
+      background: rgba(255,255,255,0.88);
+      box-shadow: 0 22px 60px rgba(15,15,15,0.08);
+      backdrop-filter: blur(10px);
+      animation: fadeInUp 0.7s ease both;
+    }
+
+    .brand {
+      font-family: "Bebas Neue", sans-serif;
+      font-size: 1.5rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: #1a1510;
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.55rem;
+      justify-content: center;
+    }
+
+    .nav-links a {
+      padding: 0.7rem 1rem;
+      border-radius: 14px;
+      background: rgba(255,255,255,0.95);
+      color: #4a4a4a;
+      text-decoration: none;
+      border: 1px solid rgba(0,0,0,0.08);
+      font-weight: 600;
+      transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease;
       font-size: 0.95rem;
     }
 
-    .about-card {
-      opacity: 0;
-      transform: translateY(16px);
-      animation: fadeInUp 0.75s ease-out both;
+    .nav-links a:hover {
+      background: #1a1510;
+      color: #fff;
+      transform: translateY(-1px);
     }
 
-    .about-card:nth-child(1) { animation-delay: 0.2s; }
-    .about-card:nth-child(2) { animation-delay: 0.3s; }
-    .about-card:nth-child(3) { animation-delay: 0.4s; }
-
-    .team-slider-section {
-      opacity: 0;
-      transform: translateY(18px);
-      animation: fadeInUp 0.75s ease-out both;
-      animation-delay: 0.45s;
+    .hero {
+      padding: 2.2rem;
+      border-radius: 28px;
+      background: #ffffff;
+      border: 1px solid rgba(0,0,0,0.08);
+      box-shadow: 0 30px 90px rgba(15,15,15,0.08);
+      text-align: center;
+      animation: fadeInUp 0.75s ease both;
     }
 
-    .team-card {
-      opacity: 0;
-      transform: translateY(12px);
-      animation: fadeInUp 0.7s ease-out both;
-    }
-
-    .team-card:nth-child(1) { animation-delay: 0.55s; }
-    .team-card:nth-child(2) { animation-delay: 0.58s; }
-    .team-card:nth-child(3) { animation-delay: 0.61s; }
-    .team-card:nth-child(4) { animation-delay: 0.64s; }
-    .team-card:nth-child(5) { animation-delay: 0.67s; }
-
-    .home-link:hover {
-      transform: translateY(-2px);
-      opacity: 0.95;
-    }
-
-    .team-slider-section {
-      margin-top: 2rem;
-      text-align: left;
-      width: 100%;
-      max-width: 720px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    .team-slider-section h3 {
+    .hero h1 {
+      font-family: "Bebas Neue", sans-serif;
+      font-size: clamp(3rem, 6vw, 4.5rem);
       margin-bottom: 1rem;
+      line-height: 0.95;
+    }
+
+    .hero p {
+      color: #5b5650;
       font-size: 1rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
+      line-height: 1.8;
+      max-width: 780px;
+      margin: 0 auto;
+    }
+
+    .highlights {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+      animation: fadeInUp 0.8s ease both;
+      animation-delay: 0.1s;
+    }
+
+    .highlight-card {
+      background: #ffffff;
+      border: 1px solid rgba(0,0,0,0.08);
+      border-radius: 24px;
+      padding: 1.5rem;
+      box-shadow: 0 18px 45px rgba(15,15,15,0.06);
+    }
+
+    .highlight-card strong {
+      display: block;
+      margin-bottom: 0.85rem;
       color: #1a1510;
+      font-size: 1rem;
+    }
+
+    .highlight-card p {
+      color: #6a6360;
+      line-height: 1.7;
+      font-size: 0.96rem;
+    }
+
+    .team-section {
+      background: #ffffff;
+      border: 1px solid rgba(0,0,0,0.08);
+      border-radius: 28px;
+      padding: 2rem;
+      box-shadow: 0 28px 90px rgba(15,15,15,0.08);
+      animation: fadeInUp 0.8s ease both;
+      animation-delay: 0.15s;
+    }
+
+    .team-section h2 {
+      font-family: "Bebas Neue", sans-serif;
+      font-size: clamp(2rem, 5vw, 3rem);
+      margin-bottom: 0.8rem;
+      text-align: center;
+    }
+
+    .team-section p {
+      color: #5b5650;
+      line-height: 1.75;
+      margin: 0 auto 1.8rem;
+      max-width: 760px;
+      text-align: center;
     }
 
     .team-slider-wrapper {
       overflow: hidden;
-      border-radius: 22px;
+      border-radius: 24px;
     }
 
     .team-slider {
       display: flex;
       gap: 1rem;
-      animation: slide 18s linear infinite;
+      padding: 0.5rem 0;
+      animation: slide 24s linear infinite;
     }
 
     .team-card {
-      min-width: 200px;
+      min-width: 220px;
       background: #ffffff;
       border: 1px solid rgba(0,0,0,0.08);
-      border-radius: 20px;
+      border-radius: 24px;
       padding: 1.4rem;
-      box-shadow: 0 16px 40px rgba(15,15,15,0.05);
+      box-shadow: 0 18px 45px rgba(15,15,15,0.06);
+      text-align: left;
     }
 
     .team-card strong {
       display: block;
       margin-bottom: 0.6rem;
-      font-size: 1rem;
       color: #1a1510;
+      font-size: 1rem;
     }
 
     .team-card span {
-      display: block;
       color: #6a6360;
+      line-height: 1.6;
       font-size: 0.95rem;
-      line-height: 1.5;
+    }
+
+    .button-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+      animation: fadeInUp 0.8s ease both;
+      animation-delay: 0.2s;
+    }
+
+    .button-row a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.95rem 1.6rem;
+      border-radius: 999px;
+      background: #1a1510;
+      color: #fff;
+      text-decoration: none;
+      font-weight: 700;
+      transition: transform 0.2s ease, background 0.2s ease;
+      border: 1px solid transparent;
+    }
+
+    .button-row a:hover {
+      transform: translateY(-2px);
+      background: #333;
+    }
+
+    .footer-bar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 1rem 1.2rem;
+      border: 1px solid rgba(0,0,0,0.08);
+      border-radius: 20px;
+      background: rgba(255,255,255,0.88);
+      box-shadow: 0 22px 60px rgba(15,15,15,0.08);
+      font-size: 0.9rem;
+      color: #5b5650;
+      animation: fadeInUp 0.8s ease both;
+      animation-delay: 0.25s;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+    }
+
+    .footer-links a {
+      color: #5b5650;
+      text-decoration: none;
+    }
+
+    .footer-links a:hover {
+      color: #1a1510;
     }
 
     @keyframes fadeInUp {
@@ -184,20 +263,96 @@
       100% { transform: translateX(-50%); }
     }
 
-    .home-link:hover {
-      transform: translateY(-2px);
-      opacity: 0.95;
+    @media (max-width: 860px) {
+      .site-header {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .hero {
+        padding: 1.7rem;
+      }
+
+      .team-slider {
+        animation-duration: 28s;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="card">
-    <h1>About Vervex</h1>
-    <p>Hi everyone, it’s me, Penguin - the owner of Vervex Studios.</p>
-    <p>I don't want to build this company on lies or focus solely on making a profit. Our true goal is to keep everything simple and clean, As a small team, moving forward a little bit at a time can be difficult for us. If you would like to support our journey, we would deeply appreciate it.</p>
-    <p>Hello! I am KCK186, The Co-Owner of Vervex and here my beliefs too:</p>
-    <p>Welcome! We are the official Vervex and Vervatinus (yep, check the domain 🧐). We believe that user privacy, old tech and web, and an AI-free approach can be beautifully combined to build great things. We aren't here for the money. Everything we do - from hosting and infrastructure to devices and domains are funded entirely by our amazing community. Thanks for stopping by, and we hope you enjoy our creations! :)</p></p>
-    <a class="home-link" href="index.html">Back to Home</a>
+  <div class="page-shell">
+    <header class="site-header">
+      <a href="index.html" class="brand">VERVEX</a>
+      <nav class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="work.html">Work</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </header>
+
+    <section class="hero">
+      <h1>About Vervex</h1>
+      <p>We are a small team making simple, privacy-focused web experiences that work well on older devices and stay honest to our community.</p>
+    </section>
+
+    <section class="highlights">
+      <div class="highlight-card">
+        <strong>Simple by design</strong>
+        <p>Every page is built to feel clean, calm, and easy to navigate without distractions.</p>
+      </div>
+      <div class="highlight-card">
+        <strong>Privacy first</strong>
+        <p>We avoid unnecessary tracking and intrusive popups, keeping the experience respectful and transparent.</p>
+      </div>
+      <div class="highlight-card">
+        <strong>Old tech friendly</strong>
+        <p>Lightweight HTML and CSS make our pages load fast even on older browsers and slower connections.</p>
+      </div>
+    </section>
+
+    <section class="team-section">
+      <h2>Meet the team</h2>
+      <p>Vervex is created by a small group of builders who care about privacy, simplicity, and the open web.</p>
+      <div class="team-slider-wrapper">
+        <div class="team-slider">
+          <div class="team-card">
+            <strong>Penguin Who</strong>
+            <span>Frontend Developer</span>
+          </div>
+          <div class="team-card">
+            <strong>kck186</strong>
+            <span>Co-owner</span>
+          </div>
+          <div class="team-card">
+            <strong>Muaves</strong>
+            <span>Visual Designer</span>
+          </div>
+          <div class="team-card">
+            <strong>Penguin Who</strong>
+            <span>Backend Developer</span>
+          </div>
+          <div class="team-card">
+            <strong>downstairs room in my house</strong>
+            <span>CTO</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="button-row">
+      <a href="join.html">Join the journey</a>
+      <a href="contact.html">Contact us</a>
+    </section>
+
+    <footer class="footer-bar">
+      <div>2026 Vervex Studios</div>
+      <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="work.html">Work</a>
+        <a href="contact.html">Contact</a>
+      </div>
+    </footer>
   </div>
 </body>
 </html>
