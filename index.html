@@ -6,8 +6,7 @@
   <title>Vervex</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=Space+Mono:wght@400;700&family=Ubuntu:wght@300;400;500;700&display=swap">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=Space+Mono:wght@400;700&family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
   <style>
     *,
     *::before,
@@ -18,7 +17,7 @@
     }
 
     body {
-      background: #f9f6f2;
+      background: radial-gradient(circle at top, rgba(255,255,255,0.95), rgba(249,246,242,1) 58%), #f9f6f2;
       font-family: "DM Sans", sans-serif;
       min-height: 100vh;
       display: flex;
@@ -185,13 +184,69 @@
       transform: translateY(-2px);
     }
 
-    .team-slider-section {
-      margin-top: 2.5rem;
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 1rem;
+      padding: 0.7rem 1rem;
+      border-radius: 999px;
+      background: rgba(26,21,16,0.08);
+      color: #1a1510;
+      font-size: 0.82rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1rem;
+      margin-top: 2rem;
       text-align: left;
       width: 100%;
-      max-width: 720px;
+      max-width: 760px;
       margin-left: auto;
       margin-right: auto;
+    }
+
+    .feature-card {
+      background: #ffffff;
+      border: 1px solid rgba(0,0,0,0.08);
+      border-radius: 20px;
+      padding: 1.4rem;
+      box-shadow: 0 16px 30px rgba(15,15,15,0.05);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .feature-card strong {
+      display: block;
+      margin-bottom: 0.6rem;
+      font-size: 1rem;
+      color: #1a1510;
+    }
+
+    .feature-card p {
+      color: #6a6360;
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 28px 55px rgba(15,15,15,0.1);
+    }
+
+    .minimal-hero {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.8rem;
+      animation: fadeInUp 0.75s ease-out both;
+    }
+
+    .hero-badge {
+      align-self: center;
     }
 
     .team-slider-section h3 {
@@ -234,6 +289,44 @@
       color: #6a6360;
       font-size: 0.95rem;
       line-height: 1.5;
+    }
+
+    .nav-flip,
+    .minimal-hero,
+    .hero-badge,
+    .feature-grid,
+    .contact,
+    .site-footer {
+      opacity: 0;
+      transform: translateY(18px);
+      animation: fadeInUp 0.75s ease-out both;
+    }
+
+    .hero-badge {
+      animation-delay: 0.2s;
+    }
+
+    .button-group {
+      animation: fadeInUp 0.75s ease-out both;
+      animation-delay: 0.1s;
+    }
+
+    .feature-card {
+      opacity: 0;
+      transform: translateY(16px);
+      animation: fadeInUp 0.75s ease-out both;
+    }
+
+    .feature-card:nth-child(1) { animation-delay: 0.25s; }
+    .feature-card:nth-child(2) { animation-delay: 0.35s; }
+    .feature-card:nth-child(3) { animation-delay: 0.45s; }
+
+    .contact { animation-delay: 0.3s; }
+    .site-footer { animation-delay: 0.38s; }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     @keyframes slide {
@@ -353,6 +446,34 @@
       align-items: center;
     }
 
+    @media (max-width: 720px) {
+      .nav-flip {
+        padding: 0 16px;
+      }
+
+      .nav-flip__links {
+        gap: 0.3rem;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .minimal-hero {
+        padding: 1.5rem;
+      }
+
+      .button-group {
+        flex-direction: column;
+      }
+
+      .feature-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .site-footer {
+        padding: 1.5rem 1rem;
+      }
+    }
+
     .social-icon {
       width: 20px;
       height: 20px;
@@ -392,52 +513,20 @@
         <a class="secondary" href="work.html">View our Work</a>
       </div>
 
-<div class="team-slider-section">
-        <h3>Meet our team</h3>
-        <div class="team-slider-wrapper">
-          <div class="team-slider">
-            <div class="team-card">
-              <strong>PenguinWhoo</strong>
-              <span>Frontend Developer</span>
-            </div>
-            <div class="team-card">
-              <strong>KCK186</strong>
-              <span>CO-Owner</span>
-            </div>
-            <div class="team-card">
-              <strong>Muaves</strong>
-              <span>Ex-Visual Designer</span>
-            </div>
-            <div class="team-card">
-              <strong>PenguinWhoo</strong>
-              <span>Backend Developer</span>
-            </div>
-            <div class="team-card">
-              <strong>downstairs room in my house</strong>
-              <span>CTO</span>
-            </div>
-            
-            <div class="team-card" aria-hidden="true">
-              <strong>PenguinWhoo</strong>
-              <span>Frontend Developer</span>
-            </div>
-            <div class="team-card" aria-hidden="true">
-              <strong>KCK186</strong>
-              <span>CO-Owner</span>
-            </div>
-            <div class="team-card" aria-hidden="true">
-              <strong>Muaves</strong>
-              <span>Ex-Visual Designer</span>
-            </div>
-            <div class="team-card" aria-hidden="true">
-              <strong>PenguinWhoo</strong>
-              <span>Backend Developer</span>
-            </div>
-            <div class="team-card" aria-hidden="true">
-              <strong>downstairs room in my house</strong>
-              <span>CTO</span>
-           
-          </div>
+      <div class="hero-badge">Fast. Private.</div>
+
+      <div class="feature-grid">
+        <div class="feature-card">
+          <strong>Minimal interface</strong>
+          <p>Clean page flow with no distractions, so visitors can focus on what matters.</p>
+        </div>
+        <div class="feature-card">
+          <strong>Privacy first</strong>
+          <p>Simple design that avoids unnecessary tracking, popups, and clutter.</p>
+        </div>
+        <div class="feature-card">
+          <strong>Optimized for old devices</strong>
+          <p>Lightweight HTML and CSS that stays fast even on older browsers.</p>
         </div>
       </div>
     </div>

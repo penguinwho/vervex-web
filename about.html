@@ -14,7 +14,7 @@
       padding: 0;
     }
     body {
-      background: #f9f6f2;
+      background: radial-gradient(circle at top, rgba(255,255,255,0.95), #f9f6f2 58%);
       color: #1a1510;
       font-family: "DM Sans", sans-serif;
       min-height: 100vh;
@@ -32,6 +32,9 @@
       border-radius: 28px;
       box-shadow: 0 25px 80px rgba(15,15,15,0.08);
       padding: 3rem;
+      opacity: 0;
+      transform: translateY(18px);
+      animation: fadeInUp 0.75s ease-out both;
     }
     h1 {
       font-family: "Bebas Neue", sans-serif;
@@ -56,6 +59,131 @@
       font-weight: 700;
       transition: transform 0.2s ease, opacity 0.2s ease;
     }
+
+    .about-highlights {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1rem;
+      margin-top: 2rem;
+      text-align: left;
+    }
+
+    .about-card {
+      background: #ffffff;
+      border: 1px solid rgba(0,0,0,0.08);
+      border-radius: 22px;
+      padding: 1.4rem;
+      box-shadow: 0 18px 40px rgba(15,15,15,0.05);
+    }
+
+    .about-card strong {
+      display: block;
+      margin-bottom: 0.75rem;
+      font-size: 1rem;
+      color: #1a1510;
+    }
+
+    .about-card p {
+      color: #6a6360;
+      line-height: 1.6;
+      font-size: 0.95rem;
+    }
+
+    .about-card {
+      opacity: 0;
+      transform: translateY(16px);
+      animation: fadeInUp 0.75s ease-out both;
+    }
+
+    .about-card:nth-child(1) { animation-delay: 0.2s; }
+    .about-card:nth-child(2) { animation-delay: 0.3s; }
+    .about-card:nth-child(3) { animation-delay: 0.4s; }
+
+    .team-slider-section {
+      opacity: 0;
+      transform: translateY(18px);
+      animation: fadeInUp 0.75s ease-out both;
+      animation-delay: 0.45s;
+    }
+
+    .team-card {
+      opacity: 0;
+      transform: translateY(12px);
+      animation: fadeInUp 0.7s ease-out both;
+    }
+
+    .team-card:nth-child(1) { animation-delay: 0.55s; }
+    .team-card:nth-child(2) { animation-delay: 0.58s; }
+    .team-card:nth-child(3) { animation-delay: 0.61s; }
+    .team-card:nth-child(4) { animation-delay: 0.64s; }
+    .team-card:nth-child(5) { animation-delay: 0.67s; }
+
+    .home-link:hover {
+      transform: translateY(-2px);
+      opacity: 0.95;
+    }
+
+    .team-slider-section {
+      margin-top: 2rem;
+      text-align: left;
+      width: 100%;
+      max-width: 720px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .team-slider-section h3 {
+      margin-bottom: 1rem;
+      font-size: 1rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #1a1510;
+    }
+
+    .team-slider-wrapper {
+      overflow: hidden;
+      border-radius: 22px;
+    }
+
+    .team-slider {
+      display: flex;
+      gap: 1rem;
+      animation: slide 18s linear infinite;
+    }
+
+    .team-card {
+      min-width: 200px;
+      background: #ffffff;
+      border: 1px solid rgba(0,0,0,0.08);
+      border-radius: 20px;
+      padding: 1.4rem;
+      box-shadow: 0 16px 40px rgba(15,15,15,0.05);
+    }
+
+    .team-card strong {
+      display: block;
+      margin-bottom: 0.6rem;
+      font-size: 1rem;
+      color: #1a1510;
+    }
+
+    .team-card span {
+      display: block;
+      color: #6a6360;
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes slide {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
     .home-link:hover {
       transform: translateY(-2px);
       opacity: 0.95;
@@ -68,7 +196,51 @@
     <p>Hi everyone, it’s me, Penguin - the owner of Vervex Studios.</p>
     <p>I don't want to build this company on lies or focus solely on making a profit. Our true goal is to keep everything simple and clean, As a small team, moving forward a little bit at a time can be difficult for us. If you would like to support our journey, we would deeply appreciate it.</p>
     <p>Hello! I am KCK186, The Co-Owner of Vervex and here my beliefs too:</p>
-    <p>Welcome! We are the official Vervex and Vervatinus (yep, check the domain 🧐). We believe that user privacy, old tech and web, and an AI-free approach can be beautifully combined to build great things. We aren't here for the money. Everything we do - from hosting and infrastructure to devices and domains are funded entirely by our amazing community. Thanks for stopping by, and we hope you enjoy our creations! :)</p></p>
+    <p>Welcome! We are the official Vervex and Vervatinus (yep, check the domain 🧐). We believe that user privacy, old tech and web, and an AI-free approach can be beautifully combined to build great things. We aren't here for the money. Everything we do - from hosting and infrastructure to devices and domains are funded entirely by our amazing community. Thanks for stopping by, and we hope you enjoy our creations! :)</p>
+
+    <div class="about-highlights">
+      <div class="about-card">
+        <strong>Our mission</strong>
+        <p>Keep the web simple, thoughtful, and accessible for people who care about control and privacy.</p>
+      </div>
+      <div class="about-card">
+        <strong>How we work</strong>
+        <p>Small, careful updates that respect older browsers and limit complexity for a smoother experience.</p>
+      </div>
+      <div class="about-card">
+        <strong>Community first</strong>
+        <p>Everything is supported by real people, not ads or surveillance, so the project stays honest.</p>
+      </div>
+    </div>
+
+    <div class="team-slider-section">
+      <h3>Meet the team</h3>
+      <div class="team-slider-wrapper">
+        <div class="team-slider">
+          <div class="team-card">
+            <strong>Penguin Who</strong>
+            <span>Frontend Developer</span>
+          </div>
+          <div class="team-card">
+            <strong>kck186</strong>
+            <span>CO Owner</span>
+          </div>
+          <div class="team-card">
+            <strong>Muaves</strong>
+            <span>Visual Designer</span>
+          </div>
+          <div class="team-card">
+            <strong>Penguin Who</strong>
+            <span>Backend Developer</span>
+          </div>
+          <div class="team-card">
+            <strong>downstairs room in my house</strong>
+            <span>CTO</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <a class="home-link" href="index.html">Back to Home</a>
   </div>
 </body>
