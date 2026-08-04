@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Configure — Awesome Phone</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#050506; --surface:#0c0d0f; --surface-2:#111316; --line:#1d2024;
+    --text:#eef1f0; --text-dim:#7d8790; --text-faint:#454b50;
+    --on:#39ff88; --on-dim:rgba(57,255,136,0.18);
+    --off:#ff5252;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{
+    background:var(--bg); color:var(--text);
+    font-family:'Inter',-apple-system,sans-serif;
+    -webkit-font-smoothing:antialiased; overflow-x:hidden; padding-bottom:34px;
+  }
+  h1,h2,h3,.display{ font-family:'Space Grotesk',sans-serif; }
+  .mono{ font-family:'JetBrains Mono',monospace; }
+  @media (prefers-reduced-motion: reduce){ *{animation-duration:.01ms !important; transition-duration:.01ms !important;} }
+  a{color:inherit;text-decoration:none;}
+  button{ font-family:inherit; }
+
+  nav{
+    position:fixed; top:0; left:0; right:0; z-index:200; height:48px;
+    display:flex; align-items:center; justify-content:center;
+    background:rgba(5,5,6,0.82); backdrop-filter:blur(20px) saturate(160%);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-row{ width:100%; max-width:1180px; padding:0 22px; display:flex; align-items:center; justify-content:space-between; }
+  .nav-row .wordmark{ font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:14px; display:flex; align-items:center; gap:9px; }
+  .nav-row .wordmark .dot{ width:7px; height:7px; border-radius:50%; background:var(--on); box-shadow:0 0 8px var(--on); animation:pulseDot 2.4s ease-in-out infinite; }
+  @keyframes pulseDot{ 0%,100%{ opacity:1; } 50%{ opacity:.4; } }
+  .nav-row .links{ display:flex; gap:26px; font-size:12px; color:var(--text-dim); }
+  .nav-row .links a:hover{ color:var(--text); }
+  @media (max-width:760px){ .nav-row .links{ display:none; } }
+
+  .page-head{ max-width:1180px; margin:0 auto; padding:100px 22px 10px; }
+  .eyebrow{ font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:var(--text-dim); margin-bottom:10px; }
+  .eyebrow::before{ content:'// '; color:var(--on); }
+  .page-head h1{ font-size:clamp(32px,5vw,48px); font-weight:600; letter-spacing:-0.02em; }
+
+  .configurator{ max-width:1180px; margin:0 auto; padding:40px 22px 120px; display:grid; grid-template-columns:1fr 420px; gap:60px; }
+  @media (max-width:900px){ .configurator{ grid-template-columns:1fr; } }
+
+  /* preview */
+  .preview{ position:sticky; top:80px; align-self:start; display:flex; flex-direction:column; align-items:center; }
+  @media (max-width:900px){ .preview{ position:static; } }
+  .preview-phone{ width:min(260px,60vw); transition:filter .3s; filter:drop-shadow(0 40px 70px rgba(0,0,0,0.7)); }
+  .preview-tag{ margin-top:26px; font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--text-dim); text-align:center; }
+  .preview-tag strong{ color:var(--text); font-weight:500; }
+
+  /* options */
+  .opt-group{ margin-bottom:44px; }
+  .opt-group .opt-label{ font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--text-dim); margin-bottom:16px; }
+
+  .model-grid{ display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+  .model-opt{
+    border:1px solid var(--line); border-radius:12px; padding:18px; cursor:pointer;
+    background:var(--surface); transition:border-color .2s, background .2s;
+  }
+  .model-opt:hover{ border-color:#2c2f33; }
+  .model-opt.active{ border-color:var(--on); background:var(--on-dim); }
+  .model-opt h4{ font-family:'Space Grotesk',sans-serif; font-size:16px; font-weight:600; margin-bottom:4px; }
+  .model-opt .sub{ font-size:12px; color:var(--text-dim); font-family:'JetBrains Mono',monospace; margin-bottom:10px; }
+  .model-opt .price{ font-size:14px; color:var(--text); font-family:'JetBrains Mono',monospace; }
+
+  .swatch-row{ display:flex; gap:14px; }
+  .swatch{
+    width:36px; height:36px; border-radius:50%; cursor:pointer; border:2px solid transparent;
+    transition:transform .2s, border-color .2s; position:relative;
+  }
+  .swatch:hover{ transform:scale(1.08); }
+  .swatch.active{ border-color:var(--on); }
+  .swatch-row + .swatch-name{ margin-top:10px; font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--text-dim); }
+
+  .storage-row{ display:flex; gap:12px; flex-wrap:wrap; }
+  .storage-opt{
+    border:1px solid var(--line); border-radius:8px; padding:12px 18px; cursor:pointer;
+    background:var(--surface); font-family:'JetBrains Mono',monospace; font-size:13px; color:var(--text-dim);
+    transition:border-color .2s, color .2s, background .2s;
+  }
+  .storage-opt:hover{ border-color:#2c2f33; }
+  .storage-opt.active{ border-color:var(--on); color:var(--text); background:var(--on-dim); }
+  .storage-opt .plus{ color:var(--text-faint); margin-left:6px; }
+
+  .toggle-row{ display:flex; align-items:center; justify-content:space-between; border:1px solid var(--line); border-radius:10px; padding:16px 18px; background:var(--surface); }
+  .toggle-row .t-label{ font-size:14px; }
+  .toggle-row .t-sub{ font-size:12px; color:var(--text-dim); margin-top:3px; }
+  .switch-track{ width:44px; height:24px; border-radius:12px; background:var(--surface-2); border:1px solid var(--line); position:relative; cursor:pointer; flex-shrink:0; }
+  .switch-knob{ position:absolute; top:2px; left:2px; width:18px; height:18px; border-radius:50%; background:#c9cccb; transition:transform .25s; }
+  .switch-track.on{ border-color:rgba(57,255,136,.4); }
+  .switch-track.on .switch-knob{ transform:translateX(20px); background:#eafff0; }
+
+  /* summary panel */
+  .summary{ border:1px solid var(--line); border-radius:14px; background:var(--surface); padding:26px; margin-top:20px; }
+  .summary-row{ display:flex; justify-content:space-between; font-size:14px; padding:10px 0; border-bottom:1px solid var(--line); }
+  .summary-row:last-of-type{ border-bottom:none; }
+  .summary-row .k{ color:var(--text-dim); }
+  .summary-total{ display:flex; justify-content:space-between; align-items:baseline; margin-top:16px; padding-top:16px; border-top:1px solid var(--line); }
+  .summary-total .k{ font-family:'Space Grotesk',sans-serif; font-size:16px; font-weight:600; }
+  .summary-total .v{ font-family:'JetBrains Mono',monospace; font-size:22px; color:var(--on); }
+
+  .qty-row{ display:flex; align-items:center; gap:14px; margin-top:18px; }
+  .qty-btn{ width:32px; height:32px; border-radius:8px; border:1px solid var(--line); background:var(--surface-2); color:var(--text); font-size:16px; cursor:pointer; }
+  .qty-val{ font-family:'JetBrains Mono',monospace; font-size:15px; min-width:20px; text-align:center; }
+
+  .buy-btn{
+    width:100%; margin-top:22px; padding:15px; border-radius:10px; border:none;
+    background:var(--on); color:#04140a; font-weight:600; font-size:15px; cursor:pointer;
+    transition:transform .2s, box-shadow .2s;
+  }
+  .buy-btn:hover{ transform:translateY(-1px); box-shadow:0 10px 26px rgba(57,255,136,0.25); }
+  .buy-note{ margin-top:14px; font-size:12px; color:var(--text-faint); text-align:center; font-family:'JetBrains Mono',monospace; }
+
+  .confirm{
+    margin-top:16px; padding:14px 16px; border-radius:10px; border:1px solid var(--on); background:var(--on-dim);
+    font-family:'JetBrains Mono',monospace; font-size:12.5px; color:var(--on); display:none;
+  }
+  .confirm.show{ display:block; }
+
+  footer{ background:#eef1ee; color:#0d0f0e; padding:34px 22px; font-size:12px; }
+  .footer-inner{ max-width:1180px; margin:0 auto; }
+  .footer-inner .legal{ font-family:'JetBrains Mono',monospace; font-size:11px; color:#5b6360; line-height:1.7; }
+
+  .signal-strip{
+    position:fixed; bottom:0; left:0; right:0; z-index:200; height:34px;
+    display:flex; align-items:center; justify-content:center;
+    background:rgba(5,5,6,0.9); backdrop-filter:blur(14px);
+    border-top:1px solid var(--line);
+    font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.06em; text-transform:uppercase;
+  }
+  .signal-strip-row{ display:flex; gap:22px; color:var(--text-faint); }
+  .signal-strip-row .seg{ display:flex; align-items:center; gap:6px; }
+  .signal-strip-row .seg .led{ width:6px; height:6px; border-radius:50%; background:var(--on); box-shadow:0 0 6px var(--on); }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-row">
+    <div class="wordmark"><span class="dot"></span>An Awesome Phone</div>
+    <div class="links">
+      <a href="index.html">Home</a>
+      <a href="awesomephone1.html">Awesome Phone 1</a>
+      <a href="awesomephone1a.html">Awesome Phone 1a</a>
+      <a href="shop.html">Shop</a>
+    </div>
+  </div>
+</nav>
+
+<div class="page-head">
+  <div class="eyebrow mono">build your own</div>
+  <h1>Configure your Awesome Phone.</h1>
+</div>
+
+<div class="configurator">
+  <div class="preview">
+    <svg class="preview-phone" id="previewPhone" viewBox="0 0 300 620" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="bodyGrad" x1="0" y1="0" x2="1" y2="1">
+          <stop id="bodyStop1" offset="0%" stop-color="#33363a"/>
+          <stop id="bodyStop2" offset="100%" stop-color="#09090a"/>
+        </linearGradient>
+      </defs>
+      <rect x="4" y="4" width="292" height="612" rx="52" fill="url(#bodyGrad)"/>
+      <rect x="14" y="14" width="272" height="592" rx="42" fill="#000"/>
+      <circle cx="150" cy="42" r="6" fill="#111" stroke="#2c2c2e" stroke-width="1"/>
+      <rect x="118" y="590" width="64" height="5" rx="2.5" fill="#3a3a3c"/>
+    </svg>
+    <div class="preview-tag mono" id="previewTag">AWESOME PHONE 1 · <strong>GRAPHITE</strong> · 128GB</div>
+  </div>
+
+  <div class="options">
+    <div class="opt-group">
+      <div class="opt-label mono">model</div>
+      <div class="model-grid">
+        <div class="model-opt active" data-model="1" data-price="649">
+          <h4>Awesome Phone 1</h4>
+          <div class="sub">GrapheneOS pre-installed · open-source</div>
+          <div class="price">from $649</div>
+        </div>
+        <div class="model-opt" data-model="1a" data-price="449">
+          <h4>Awesome Phone 1a</h4>
+          <div class="sub">GrapheneOS pre-installed · build at home</div>
+          <div class="price">from $449</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="opt-group">
+      <div class="opt-label mono">finish</div>
+      <div class="swatch-row">
+        <div class="swatch active" data-color="Graphite" data-hex1="#33363a" data-hex2="#09090a" style="background:linear-gradient(160deg,#33363a,#09090a);"></div>
+        <div class="swatch" data-color="Signal White" data-hex1="#e9ebe9" data-hex2="#c7cac8" style="background:linear-gradient(160deg,#e9ebe9,#c7cac8);"></div>
+        <div class="swatch" data-color="Phosphor Green" data-hex1="#2b4a3a" data-hex2="#0b1310" style="background:linear-gradient(160deg,#2b4a3a,#0b1310);"></div>
+      </div>
+      <div class="swatch-name mono" id="colorName">Graphite</div>
+    </div>
+
+    <div class="opt-group">
+      <div class="opt-label mono">storage</div>
+      <div class="storage-row">
+        <div class="storage-opt active" data-storage="128" data-add="0">128GB</div>
+        <div class="storage-opt" data-storage="256" data-add="100">256GB <span class="plus">+$100</span></div>
+      </div>
+    </div>
+
+    <div class="opt-group">
+      <div class="opt-label mono">kill switch rail</div>
+      <div class="toggle-row">
+        <div>
+          <div class="t-label">Hardware kill switch</div>
+          <div class="t-sub">Standard on every unit — not optional.</div>
+        </div>
+        <div class="switch-track on" style="pointer-events:none;"><div class="switch-knob"></div></div>
+      </div>
+    </div>
+
+    <div class="opt-group">
+      <div class="opt-label mono">quantity</div>
+      <div class="qty-row">
+        <button class="qty-btn" id="qtyMinus">−</button>
+        <div class="qty-val mono" id="qtyVal">1</div>
+        <button class="qty-btn" id="qtyPlus">+</button>
+      </div>
+    </div>
+
+    <div class="summary">
+      <div class="summary-row"><span class="k">Model</span><span class="v mono" id="sumModel">Awesome Phone 1</span></div>
+      <div class="summary-row"><span class="k">Finish</span><span class="v mono" id="sumColor">Graphite</span></div>
+      <div class="summary-row"><span class="k">Storage</span><span class="v mono" id="sumStorage">128GB</span></div>
+      <div class="summary-row"><span class="k">Quantity</span><span class="v mono" id="sumQty">1</span></div>
+      <div class="summary-total"><span class="k">Total</span><span class="v" id="sumTotal">$649</span></div>
+    </div>
+
+    <button class="buy-btn" id="buyBtn">Add to bag — Buy now</button>
+    <div class="buy-note">In the box: braided USB-C cable, precision SIM pin. Ships with kill switch installed.</div>
+    <div class="confirm mono" id="confirmMsg"></div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="legal">
+      Configuration and pricing shown are illustrative. Every Awesome Phone ships with the same hardware kill-switch rail regardless of model, finish, or storage selected.
+    </div>
+  </div>
+</footer>
+
+<div class="signal-strip">
+  <div class="signal-strip-row">
+    <div class="seg"><span class="led"></span><span>RF: KILL-SWITCH READY</span></div>
+    <div class="seg"><span class="led"></span><span>MIC: KILL-SWITCH READY</span></div>
+  </div>
+</div>
+
+<script>
+  const state = { model:'1', price:649, name:'Awesome Phone 1', color:'Graphite', hex1:'#33363a', hex2:'#09090a', storage:128, add:0, qty:1 };
+
+  const modelOpts = document.querySelectorAll('.model-opt');
+  const swatches = document.querySelectorAll('.swatch');
+  const storageOpts = document.querySelectorAll('.storage-opt');
+  const bodyStop1 = document.getElementById('bodyStop1');
+  const bodyStop2 = document.getElementById('bodyStop2');
+
+  modelOpts.forEach(opt => opt.addEventListener('click', () => {
+    modelOpts.forEach(o => o.classList.remove('active'));
+    opt.classList.add('active');
+    state.model = opt.dataset.model;
+    state.price = parseInt(opt.dataset.price);
+    state.name = opt.querySelector('h4').textContent;
+    render();
+  }));
+
+  swatches.forEach(sw => sw.addEventListener('click', () => {
+    swatches.forEach(s => s.classList.remove('active'));
+    sw.classList.add('active');
+    state.color = sw.dataset.color;
+    state.hex1 = sw.dataset.hex1;
+    state.hex2 = sw.dataset.hex2;
+    document.getElementById('colorName').textContent = state.color;
+    bodyStop1.setAttribute('stop-color', state.hex1);
+    bodyStop2.setAttribute('stop-color', state.hex2);
+    render();
+  }));
+
+  storageOpts.forEach(opt => opt.addEventListener('click', () => {
+    storageOpts.forEach(o => o.classList.remove('active'));
+    opt.classList.add('active');
+    state.storage = opt.dataset.storage;
+    state.add = parseInt(opt.dataset.add);
+    render();
+  }));
+
+  document.getElementById('qtyMinus').addEventListener('click', () => { if(state.qty>1){ state.qty--; render(); } });
+  document.getElementById('qtyPlus').addEventListener('click', () => { if(state.qty<10){ state.qty++; render(); } });
+
+  function render(){
+    document.getElementById('previewTag').innerHTML = `${state.name.toUpperCase()} · <strong>${state.color.toUpperCase()}</strong> · ${state.storage}GB`;
+    document.getElementById('sumModel').textContent = state.name;
+    document.getElementById('sumColor').textContent = state.color;
+    document.getElementById('sumStorage').textContent = state.storage + 'GB';
+    document.getElementById('sumQty').textContent = state.qty;
+    const total = (state.price + state.add) * state.qty;
+    document.getElementById('sumTotal').textContent = '$' + total.toLocaleString();
+  }
+
+  document.getElementById('buyBtn').addEventListener('click', () => {
+    const msg = document.getElementById('confirmMsg');
+    msg.textContent = `ORDER_READY :: ${state.qty}x ${state.name} (${state.color}, ${state.storage}GB) — checkout would continue from here.`;
+    msg.classList.add('show');
+  });
+
+  render();
+</script>
+
+</body>
+</html>

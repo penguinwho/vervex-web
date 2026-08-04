@@ -210,6 +210,64 @@
       margin-right: auto;
     }
 
+    .phone-showcase {
+      width: 100%;
+      max-width: 900px;
+      margin-top: 2.5rem;
+      background: rgba(255,255,255,0.96);
+      border: 1px solid rgba(0,0,0,0.08);
+      border-radius: 24px;
+      padding: 2rem;
+      box-shadow: 0 20px 70px rgba(15,15,15,0.08);
+      text-align: left;
+    }
+
+    .phone-showcase h2 {
+      font-size: 2rem;
+      margin-bottom: 0.6rem;
+      color: #1a1510;
+    }
+
+    .phone-showcase p {
+      color: #5b5650;
+      line-height: 1.8;
+      margin-bottom: 1.25rem;
+    }
+
+    .phone-grid {
+      display: grid;
+      gap: 1rem;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    }
+
+    .phone-card {
+      display: block;
+      padding: 1.2rem;
+      border-radius: 18px;
+      background: #f8f5f0;
+      border: 1px solid rgba(0,0,0,0.08);
+      color: #1a1510;
+      text-decoration: none;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .phone-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 30px rgba(15,15,15,0.08);
+    }
+
+    .phone-card strong {
+      display: block;
+      margin-bottom: 0.35rem;
+      font-size: 1rem;
+    }
+
+    .phone-card span {
+      color: #6a6360;
+      font-size: 0.95rem;
+      line-height: 1.55;
+    }
+
     .feature-card {
       background: #ffffff;
       border: 1px solid rgba(0,0,0,0.08);
@@ -498,6 +556,8 @@
       <li><a href="./index.html" data-label="Home">Home</a></li>
       <li><a href="./work.html" data-label="Work">Work</a></li>
       <li><a href="./about.html" data-label="About">About</a></li>
+      <li><a href="./awesomephone1.html" data-label="Phones">Phones</a></li>
+      <li><a href="./shop.html" data-label="Shop">Shop</a></li>
       <li><a href="https://bsky.app/profile/vervex.hu/" data-label="Blog">Blog</a></li>
       <li><a href="./contact.html" data-label="Contact">Contact</a></li>
     </ul>
@@ -532,6 +592,21 @@
     </div>
   </section>
 
+  <section class="phone-showcase">
+    <h2>Phones</h2>
+    <p>Browse the privacy-first hardware builds and jump to the full product pages.</p>
+    <div class="phone-grid">
+      <a class="phone-card" href="awesomephone1.html">
+        <strong>Awesome Phone 1</strong>
+        <span>Flagship build with Tensor G2, dual camera, and the full kill-switch experience.</span>
+      </a>
+      <a class="phone-card" href="awesomephone1a.html">
+        <strong>Awesome Phone 1a</strong>
+        <span>Budget-friendly variant built around the same privacy architecture and hardware rail.</span>
+      </a>
+    </div>
+  </section>
+
   <section id="contact" class="contact">
     <h2>Contact</h2>
     <p>Have a project idea or a question? Send a message and tell us about it!</p>
@@ -543,8 +618,10 @@
     <span class="site-footer__brand">VERVEX</span>
     <div class="site-footer__links">
       <a href="./index.html">Home</a>
-      <a href="#">Work</a>
+      <a href="./work.html">Work</a>
       <a href="./about.html">About</a>
+      <a href="./awesomephone1.html">Phones</a>
+      <a href="./shop.html">Shop</a>
       <a href="./contact.html">Contact</a>
     </div>
     <div class="site-footer__socials">

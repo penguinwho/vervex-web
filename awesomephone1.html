@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Awesome Phone 1</title>
+<style>
+  :root{
+    --black:#000; --white:#fff;
+    --gray:#86868b; --gray-dark:#1d1d1f; --hairline:#d2d2d7; --hairline-dark:#424245;
+    --paper:#f5f5f7;
+    --on:#38c976; --off:#ff453a;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth; scroll-padding-top:72px;}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",Helvetica,Arial,sans-serif;
+    background:var(--black); color:var(--white); -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  @media (prefers-reduced-motion: reduce){ *{animation-duration:.01ms !important; transition-duration:.01ms !important; scroll-behavior:auto !important;} }
+  a{color:inherit;text-decoration:none;}
+
+  /* NAV */
+  nav{
+    position:fixed; top:0; left:0; right:0; z-index:200; height:44px;
+    display:flex; align-items:center; justify-content:center;
+    background:rgba(0,0,0,0.8); backdrop-filter:blur(20px) saturate(180%);
+    border-bottom:1px solid rgba(255,255,255,0.08);
+  }
+  .nav-row{ width:100%; max-width:1024px; padding:0 22px; display:flex; align-items:center; justify-content:space-between; font-size:12px; }
+  .nav-row .wordmark{ font-weight:600; font-size:13px; }
+  .nav-row .links{ display:flex; gap:26px; color:#f5f5f7; }
+  .nav-row .links a{ opacity:.8; transition:opacity .2s; }
+  .nav-row .links a:hover{ opacity:1; }
+  .nav-row .buy{ background:#f5f5f7; color:#000; padding:5px 14px; border-radius:980px; font-weight:500; }
+  @media (max-width:734px){
+    .nav-row{ gap:10px; padding:0 14px; }
+    .nav-row .links{ display:flex; flex-wrap:wrap; justify-content:flex-end; gap:10px; font-size:11px; }
+    .nav-row .buy{ padding:5px 12px; }
+  }
+
+  /* HERO */
+  .hero{
+    min-height:100vh; display:flex; flex-direction:column; align-items:center;
+    padding:120px 20px 60px; text-align:center; position:relative;
+    overflow:hidden;
+  }
+  .hero::before{
+    content:''; position:absolute; top:-10%; left:50%; width:120vw; height:70vh;
+    background:radial-gradient(ellipse at center, rgba(110,123,255,0.16), transparent 65%);
+    transform:translateX(-50%);
+    animation:glowDrift 10s ease-in-out infinite;
+    pointer-events:none;
+  }
+  @keyframes glowDrift{
+    0%,100%{ opacity:.7; transform:translateX(-50%) scale(1); }
+    50%{ opacity:1; transform:translateX(-50%) scale(1.08); }
+  }
+  .hero > *{ position:relative; z-index:1; }
+  .hero .eyebrow{ font-size:19px; font-weight:600; color:var(--gray); margin-bottom:6px; opacity:0; animation:fadeUp .7s .05s forwards; }
+  .hero h1{
+    font-size:clamp(44px,9vw,96px); font-weight:600; letter-spacing:-0.03em; line-height:1.02;
+    opacity:0; animation:fadeUp .7s .15s forwards;
+  }
+  .hero .tagline{ font-size:clamp(20px,2.6vw,28px); font-weight:600; margin-top:10px; color:#f5f5f7; opacity:0; animation:fadeUp .7s .28s forwards; }
+  .hero .links{ margin-top:22px; display:flex; gap:28px; font-size:19px; opacity:0; animation:fadeUp .7s .4s forwards; }
+  @keyframes fadeUp{ from{ opacity:0; transform:translateY(14px); } to{ opacity:1; transform:translateY(0); } }
+  .hero .links a{ color:#2997ff; }
+  .hero .links a:hover{ text-decoration:underline; }
+
+  /* phone render */
+  .phone-wrap{ margin-top:56px; display:flex; justify-content:center; }
+  .phone{
+    width:min(280px,60vw); filter:drop-shadow(0 40px 70px rgba(0,0,0,0.65));
+    opacity:0; transform:translateY(40px) scale(0.94);
+    animation:phoneIn 1s cubic-bezier(.2,.8,.2,1) .3s forwards, phoneFloat 5s ease-in-out 1.3s infinite;
+  }
+  @keyframes phoneIn{ to{ opacity:1; transform:translateY(0) scale(1); } }
+  @keyframes phoneFloat{ 0%,100%{ transform:translateY(0) scale(1); } 50%{ transform:translateY(-10px) scale(1); } }
+
+  .swatches{ margin-top:34px; display:flex; gap:12px; align-items:center; opacity:0; animation:fadeUp .7s 1.1s forwards; }
+  .swatch{ width:20px; height:20px; border-radius:50%; border:1px solid rgba(255,255,255,0.25); cursor:pointer; transition:transform .2s; }
+  .swatch:hover{ transform:scale(1.15); }
+  .swatch:focus-visible{ outline:2px solid #fff; outline-offset:3px; }
+  .swatch.active{ box-shadow:0 0 0 2px #000, 0 0 0 3px #f5f5f7; }
+  .swatch-label{ margin-top:10px; font-size:12px; color:var(--gray); font-weight:500; }
+
+  /* generic section */
+  section{ padding:140px 20px; }
+  .inner{ max-width:1024px; margin:0 auto; }
+  .feature{ text-align:center; }
+  .feature .eyebrow{ font-size:17px; font-weight:600; color:var(--gray); margin-bottom:8px; }
+  .feature h2{ font-size:clamp(34px,6vw,64px); font-weight:600; letter-spacing:-0.03em; line-height:1.05; max-width:760px; margin:0 auto; }
+  .feature p.lede{ font-size:clamp(17px,2vw,21px); color:var(--gray); max-width:600px; margin:20px auto 0; line-height:1.5; }
+  .light{ background:var(--paper); color:#1d1d1f; }
+  .light .feature .eyebrow{ color:#6e6e73; }
+  .light .feature p.lede{ color:#6e6e73; }
+  .light .spec-table th, .light .spec-table td{ border-color:var(--hairline); }
+
+  .reveal{ opacity:0; transform:translateY(24px); transition:opacity .8s ease, transform .8s ease; }
+  .reveal.in{ opacity:1; transform:translateY(0); }
+  .stagger > *{ opacity:0; }
+  .reveal.in .stagger > *{ transform:translateY(18px); animation:staggerIn .7s ease forwards; }
+  .reveal.in .stagger > *:nth-child(1){ animation-delay:.05s; }
+  .reveal.in .stagger > *:nth-child(2){ animation-delay:.18s; }
+  .reveal.in .stagger > *:nth-child(3){ animation-delay:.31s; }
+  @keyframes staggerIn{ to{ opacity:1; transform:translateY(0); } }
+
+  /* rear camera module */
+  .camera-visual{ margin-top:60px; display:flex; justify-content:center; gap:60px; flex-wrap:wrap; align-items:flex-end; }
+  .camera-block{ text-align:center; display:flex; flex-direction:column; align-items:center; gap:14px; min-width:180px; }
+  .camera-block svg{ width:min(150px,100%); height:auto; display:block; }
+  .camera-block .label{ font-size:13px; color:var(--gray); font-weight:500; }
+  .lens{ transform-origin:center; }
+  .lens .glint{ animation:glint 3.2s ease-in-out infinite; }
+  .lens.wide .glint{ animation-delay:.5s; }
+  @keyframes glint{
+    0%,100%{ opacity:.15; }
+    50%{ opacity:.85; }
+  }
+  .cam-pop{ opacity:0; transform:scale(.8) translateY(10px); animation:camPop .6s cubic-bezier(.2,.8,.2,1) forwards; }
+  .in .cam-pop.two{ animation-delay:.15s; }
+  .reveal.in .camera-block{ animation:cameraBlockIn .7s ease both; }
+  .reveal.in .camera-block:nth-child(2){ animation-delay:.12s; }
+  @keyframes camPop{
+    from{ opacity:0; transform:scale(.8) translateY(10px); }
+    to{ opacity:1; transform:scale(1) translateY(0); }
+  }
+  @keyframes cameraBlockIn{
+    from{ opacity:0; transform:translateY(18px) scale(.96); }
+    to{ opacity:1; transform:translateY(0) scale(1); }
+  }
+
+  /* side profile visual for kill switch */
+  .rail-visual{ margin-top:60px; display:flex; justify-content:center; }
+  .rail{ width:min(150px,40vw); }
+
+  /* chip glow visual */
+  .chip-visual{ margin-top:60px; display:flex; justify-content:center; }
+  .chip{ width:min(220px,55vw); }
+
+  /* SPECS COMPARE */
+  .compare-wrap{ overflow-x:auto; margin-top:70px; }
+  table.spec-table{ width:100%; border-collapse:collapse; min-width:620px; }
+  .spec-table th{ text-align:left; font-size:13px; font-weight:600; color:var(--gray); padding:14px 16px; border-bottom:1px solid var(--hairline-dark); position:sticky; top:0; }
+  .spec-table td{ padding:16px; font-size:15px; border-bottom:1px solid var(--hairline-dark); }
+  .spec-table td.row-label{ color:var(--gray); font-size:13px; text-transform:uppercase; letter-spacing:.02em; }
+  .spec-table th.col{ text-align:center; font-size:17px; }
+  .spec-table td.col{ text-align:center; }
+  .check{ color:var(--on); font-weight:700; }
+
+  /* unbox strip */
+  .unbox-row{ display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--hairline-dark); margin-top:60px; border:1px solid var(--hairline-dark); border-radius:18px; overflow:hidden; }
+  @media (max-width:700px){ .unbox-row{ grid-template-columns:1fr; } }
+  .unbox-cell{ background:#000; padding:44px 30px; text-align:center; }
+  .unbox-cell h4{ font-size:17px; font-weight:600; margin-bottom:10px; }
+  .unbox-cell p{ font-size:14px; color:var(--gray); line-height:1.55; }
+
+  /* CTA close */
+  .close-cta{ text-align:center; padding:160px 20px; }
+  .close-cta h2{ font-size:clamp(32px,5.5vw,58px); font-weight:600; letter-spacing:-0.03em; margin-bottom:20px; }
+  .close-cta .links{ display:flex; justify-content:center; gap:28px; font-size:19px; }
+  .close-cta .links a{ color:#2997ff; }
+  section[id]{ scroll-margin-top:72px; }
+
+  footer{ background:var(--paper); color:#1d1d1f; padding:36px 20px; font-size:12px; }
+  .footer-inner{ max-width:1024px; margin:0 auto; }
+  .footer-inner .legal{ color:#6e6e73; border-bottom:1px solid var(--hairline); padding-bottom:20px; margin-bottom:16px; line-height:1.6; }
+  .footer-links{ display:flex; flex-wrap:wrap; gap:0; color:#6e6e73; }
+  .footer-links a{ padding-right:12px; margin-right:12px; border-right:1px solid var(--hairline); }
+  .footer-links a:last-child{ border-right:none; }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-row">
+    <div class="wordmark">Awesome Phone</div>
+    <div class="links">
+      <a href="index.html">Home</a>
+      <a href="#overview">Overview</a>
+      <a href="#switch">Kill Switch</a>
+      <a href="#camera">Camera</a>
+      <a href="awesomephone1a.html">Awesome Phone 1a</a>
+      <a href="shop.html">Shop</a>
+    </div>
+    <a href="shop.html" class="buy">Shop</a>
+  </div>
+</nav>
+
+<section class="hero" id="overview">
+  <div class="eyebrow">Awesome Phone 1</div>
+  <h1>Privacy.</h1>
+  <div class="tagline">By default.</div>
+  <div class="links">
+    <a href="#compare">Buy &gt;</a>
+    <a href="#switch">Learn more &gt;</a>
+  </div>
+
+  <div class="phone-wrap">
+    <svg class="phone" viewBox="0 0 300 620" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="screenGrad" x1="0" y1="0" x2="1" y2="1">
+          <stop id="screenStop1" offset="0%" stop-color="#1c1c1e"/>
+          <stop id="screenStop2" offset="100%" stop-color="#000"/>
+        </linearGradient>
+        <linearGradient id="bodyGrad" x1="0" y1="0" x2="1" y2="1">
+          <stop id="bodyStop1" offset="0%" stop-color="#3a3a3d"/>
+          <stop id="bodyStop2" offset="100%" stop-color="#0a0a0a"/>
+        </linearGradient>
+      </defs>
+      <rect id="phoneBody" x="4" y="4" width="292" height="612" rx="52" fill="url(#bodyGrad)"/>
+      <rect id="phoneScreen" x="14" y="14" width="272" height="592" rx="42" fill="url(#screenGrad)"/>
+      <circle cx="150" cy="42" r="6" fill="#111" stroke="#2c2c2e" stroke-width="1"/>
+      <rect x="118" y="590" width="64" height="5" rx="2.5" fill="#3a3a3c"/>
+    </svg>
+  </div>
+
+  <div class="swatches" role="list" aria-label="Phone color options">
+    <button class="swatch active" type="button" aria-label="Graphite finish" data-body1="#3a3a3d" data-body2="#0a0a0a" data-screen1="#1c1c1e" data-screen2="#000" style="background:#1d1d1f;"></button>
+    <button class="swatch" type="button" aria-label="Silver finish" data-body1="#e9ebe9" data-body2="#c7cac8" data-screen1="#f5f5f7" data-screen2="#d8d9da" style="background:#e3e4e5;"></button>
+    <button class="swatch" type="button" aria-label="Blue finish" data-body1="#4f6377" data-body2="#25313b" data-screen1="#475d71" data-screen2="#19232c" style="background:#4a5a6a;"></button>
+  </div>
+  <div class="swatch-label" id="swatchLabel">Graphite finish selected</div>
+</section>
+
+<section id="switch">
+  <div class="inner feature reveal">
+    <div class="eyebrow">Hardware, not software.</div>
+    <h2>The switch that means it.</h2>
+    <p class="lede">A physical slide switch on the left rail sits inline with the Wi-Fi, cellular, Bluetooth, and microphone circuits. Flip it, and those pathways are cut before any chip or OS ever sees a signal.</p>
+
+    <div class="rail-visual">
+      <svg class="rail" viewBox="0 0 160 340" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="railBody" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#2c2c2e"/>
+            <stop offset="100%" stop-color="#050505"/>
+          </linearGradient>
+        </defs>
+        <rect x="4" y="4" width="152" height="332" rx="38" fill="url(#railBody)" stroke="#3a3a3c" stroke-width="1"/>
+        <rect x="0" y="58" width="6" height="28" rx="3" fill="#38c976"/>
+        <rect x="0" y="104" width="6" height="36" rx="3" fill="#4a4a4d"/>
+        <rect x="0" y="150" width="6" height="36" rx="3" fill="#4a4a4d"/>
+        <rect x="0" y="206" width="6" height="14" rx="3" fill="#4a4a4d"/>
+        <circle cx="80" cy="46" r="14" fill="#000" stroke="#2c2c2e" stroke-width="1"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<section class="light">
+  <div class="inner feature reveal">
+    <div class="eyebrow">Tensor, inside.</div>
+    <h2>Serious silicon.<br>No compromise on speed.</h2>
+    <p class="lede">Awesome Phone 1 runs on the Tensor G2 platform. Awesome Phone 1a runs first‑generation Tensor. Same privacy architecture, different budget.</p>
+    <div class="chip-visual">
+      <svg class="chip" viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg">
+        <rect x="30" y="30" width="160" height="160" rx="18" fill="#1d1d1f"/>
+        <rect x="50" y="50" width="120" height="120" rx="10" fill="#000"/>
+        <g stroke="#38c976" stroke-width="2">
+          <line x1="10" y1="70" x2="30" y2="70"/>
+          <line x1="10" y1="110" x2="30" y2="110"/>
+          <line x1="10" y1="150" x2="30" y2="150"/>
+          <line x1="190" y1="70" x2="210" y2="70"/>
+          <line x1="190" y1="110" x2="210" y2="110"/>
+          <line x1="190" y1="150" x2="210" y2="150"/>
+          <line x1="70" y1="10" x2="70" y2="30"/>
+          <line x1="110" y1="10" x2="110" y2="30"/>
+          <line x1="150" y1="10" x2="150" y2="30"/>
+          <line x1="70" y1="190" x2="70" y2="210"/>
+          <line x1="110" y1="190" x2="110" y2="210"/>
+          <line x1="150" y1="190" x2="150" y2="210"/>
+        </g>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<section id="camera">
+  <div class="inner feature reveal">
+    <div class="eyebrow">See more. Miss less.</div>
+    <h2>Now with Wide.</h2>
+    <p class="lede">Awesome Phone 1 adds a second camera alongside the main sensor — a wide lens for tighter interiors and group shots. Awesome Phone 1a keeps the single-camera cutout.</p>
+
+    <div class="camera-visual">
+      <div class="camera-block">
+        <svg class="cam-pop" width="120" height="140" viewBox="0 0 120 140" xmlns="http://www.w3.org/2000/svg">
+          <rect x="4" y="4" width="112" height="132" rx="26" fill="#0d0d0d" stroke="#2c2c2e" stroke-width="1"/>
+          <circle class="lens" cx="60" cy="70" r="30" fill="#000" stroke="#3a3a3c" stroke-width="1.5"/>
+          <circle class="lens" cx="60" cy="70" r="18" fill="#111"/>
+          <circle class="lens glint" cx="52" cy="62" r="5" fill="#6e7bff"/>
+        </svg>
+        <div class="label">Awesome Phone 1a — single</div>
+      </div>
+      <div class="camera-block">
+        <svg width="150" height="140" viewBox="0 0 150 140" xmlns="http://www.w3.org/2000/svg">
+          <rect class="cam-pop" x="4" y="4" width="142" height="132" rx="30" fill="#0d0d0d" stroke="#2c2c2e" stroke-width="1"/>
+          <g class="cam-pop">
+            <circle class="lens" cx="55" cy="70" r="32" fill="#000" stroke="#3a3a3c" stroke-width="1.5"/>
+            <circle class="lens" cx="55" cy="70" r="19" fill="#111"/>
+            <circle class="lens glint" cx="47" cy="61" r="5" fill="#6e7bff"/>
+          </g>
+          <g class="cam-pop two">
+            <circle class="lens wide" cx="105" cy="70" r="22" fill="#000" stroke="#3a3a3c" stroke-width="1.5"/>
+            <circle class="lens wide" cx="105" cy="70" r="13" fill="#111"/>
+            <circle class="lens wide glint" cx="99" cy="63" r="3.5" fill="#38c976"/>
+          </g>
+        </svg>
+        <div class="label">Awesome Phone 1 — main + wide</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="compare">
+  <div class="inner reveal">
+    <div class="feature">
+      <div class="eyebrow">Which is right for you.</div>
+      <h2>Compare the lineup.</h2>
+      <p class="lede">Both phones ship with GrapheneOS pre-installed. Both are open-source and can be built at home.</p>
+    </div>
+
+    <div class="compare-wrap">
+      <table class="spec-table">
+        <thead>
+          <tr>
+            <th></th>
+            <th class="col">Awesome Phone 1</th>
+            <th class="col">Awesome Phone 1a</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="row-label">Operating system</td>
+            <td class="col">GrapheneOS pre-installed</td>
+            <td class="col">GrapheneOS pre-installed</td>
+          </tr>
+          <tr>
+            <td class="row-label">Chipset</td>
+            <td class="col">Tensor G2</td>
+            <td class="col">Tensor (Gen 1)</td>
+          </tr>
+          <tr>
+            <td class="row-label">Hardware kill switch</td>
+            <td class="col"><span class="check">✓</span></td>
+            <td class="col"><span class="check">✓</span></td>
+          </tr>
+          <tr>
+            <td class="row-label">Dedicated power button</td>
+            <td class="col"><span class="check">✓</span></td>
+            <td class="col"><span class="check">✓</span></td>
+          </tr>
+          <tr>
+            <td class="row-label">Rear camera</td>
+            <td class="col">Main + Wide (dual cutout)</td>
+            <td class="col">Single cutout</td>
+          </tr>
+          <tr>
+            <td class="row-label">Charging indicator</td>
+            <td class="col"><span class="check">✓</span></td>
+            <td class="col"><span class="check">✓</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section id="unbox" class="light">
+  <div class="inner feature reveal">
+    <div class="eyebrow">What's inside.</div>
+    <h2>In the box.</h2>
+    <div class="unbox-row stagger">
+      <div class="unbox-cell">
+        <h4>Awesome Phone</h4>
+        <p>Your Awesome Phone 1 or 1a, fully assembled with the kill‑switch rail installed.</p>
+      </div>
+      <div class="unbox-cell">
+        <h4>USB‑C Cable</h4>
+        <p>Braided USB‑C to USB‑C, built to outlast the charger it came with.</p>
+      </div>
+      <div class="unbox-cell">
+        <h4>SIM Pin</h4>
+        <p>A precision metal pin, sized exactly to the Awesome Phone SIM tray.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="close-cta reveal">
+  <h2>Awesome Phone 1.<br>Privacy. By default.</h2>
+  <div class="links">
+    <a href="#compare">Buy &gt;</a>
+    <a href="#switch">Learn more &gt;</a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="legal">
+      Both Awesome Phone 1 and Awesome Phone 1a ship with GrapheneOS pre-installed. Both are open-source and can be built at home. Specifications are subject to change. Kill switch severs Wi‑Fi, cellular, Bluetooth, and microphone pathways at the hardware level.
+    </div>
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="#overview">Overview</a>
+      <a href="awesomephone1a.html">Awesome Phone 1a</a>
+      <a href="shop.html">Shop</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const revealElements = document.querySelectorAll('.reveal');
+  const activateReveal = (el) => el.classList.add('in');
+
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => { if (entry.isIntersecting) activateReveal(entry.target); });
+    }, { threshold: 0.15 });
+    revealElements.forEach(el => observer.observe(el));
+  } else {
+    revealElements.forEach(activateReveal);
+  }
+
+  const bodyStop1 = document.getElementById('bodyStop1');
+  const bodyStop2 = document.getElementById('bodyStop2');
+  const screenStop1 = document.getElementById('screenStop1');
+  const screenStop2 = document.getElementById('screenStop2');
+  const swatchLabel = document.getElementById('swatchLabel');
+
+  document.querySelectorAll('.swatch').forEach(sw => {
+    sw.addEventListener('click', () => {
+      document.querySelectorAll('.swatch').forEach(s => s.classList.remove('active'));
+      sw.classList.add('active');
+      bodyStop1.setAttribute('stop-color', sw.dataset.body1);
+      bodyStop2.setAttribute('stop-color', sw.dataset.body2);
+      screenStop1.setAttribute('stop-color', sw.dataset.screen1);
+      screenStop2.setAttribute('stop-color', sw.dataset.screen2);
+      swatchLabel.textContent = sw.getAttribute('aria-label').replace(' finish', ' finish selected');
+    });
+  });
+</script>
+
+</body>
+</html>
