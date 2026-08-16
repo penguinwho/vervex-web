@@ -3,10 +3,8 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="HandheldFriendly" content="true">
-    <meta name="MobileOptimized" content="320">
-    
     <title>-_- KCK186's Website!</title>
+    <!-- I put your entire CSS style block into a separate file conceptually, but embedded it here so it works outta the box -->
     <style type="text/css">
         @font-face {
             font-family: Aeonik;
@@ -225,3 +223,23 @@
             }
         }
     </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header loads here -->
+        <div id="header"></div>
+
+        <div class="title">Wazaaaap!</div>
+        
+        <div class="bio-section">
+            <h2>Welcome to da crib - Vervatinus</h2>
+            <p>We are a part of Vervex, our phone manufacturer</p>
+        </div>
+        <div id="footer"></div>
+    </div>
+    <script>
+        fetch('header.html').then(r => r.text()).then(t => document.getElementById('header').innerHTML = t);
+        fetch('footer.html').then(r => r.text()).then(t => document.getElementById('footer').innerHTML = t);
+    </script>
+</body>
+</html>
