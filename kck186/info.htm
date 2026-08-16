@@ -1,0 +1,239 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="HandheldFriendly" content="true">
+    <meta name="MobileOptimized" content="320">
+    
+    <title>-_- KCK186's Website!</title>
+    <style type="text/css">
+        @font-face {
+            font-family: Aeonik;
+            src: url(https://static-cdn.5h1pm3n7.com/website_amo/fonts/Aeonik-Medium.otf);
+            font-weight: 500;
+            font-style: normal;
+            font-display: swap;
+        }
+        @font-face {
+            font-family: Aeonik;
+            src: url(https://static-cdn.5h1pm3n7.com/website_amo/fonts/Aeonik-Bold.otf);
+            font-weight: 800;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        :root {
+            --qwik-dark-blue: #006ce9;
+            --main-border-color: rgba(71, 58, 45, 0.1);
+            --main-bg-color: #f7f3f0;
+            --active-bg-color: #ffffff;
+            --qwik-text: #272727;
+            --faded-gray: #cbcbcb;
+        }
+
+        *, *:before, *:after {
+            box-sizing: border-box;
+        }
+
+        html, body {
+            max-width: 100%;
+            overflow-x: hidden;
+        }
+
+        body {
+            background-color: var(--main-bg-color);
+            color: var(--qwik-text);
+            font-family: Aeonik, Helvetica, sans-serif;
+            font-size: 20px;
+            font-weight: 500;
+            line-height: 1.5;
+            padding: 20px 10px;
+            margin: 0;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        p, a, li, code, div, h1, h2, h3 {
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            word-break: break-word;
+            max-width: 100%;
+        }
+
+        a {
+            color: var(--qwik-dark-blue);
+            text-decoration: none;
+            font-weight: 800;
+            transition: opacity 0.15s ease-in-out;
+        }
+
+        a:hover, a:active {
+            opacity: 0.7;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .title {
+            background: linear-gradient(180deg, #fff 0%, rgba(255,255,255,0) 100%), var(--active-bg-color);
+            color: var(--qwik-text);
+            font-size: 28px;
+            font-weight: 800;
+            text-align: center;
+            padding: 20px;
+            border-radius: 20px;
+            border: 0.5px solid var(--main-border-color);
+            box-shadow: 0 1.5px 6px rgba(71, 58, 45, 0.05);
+            margin-bottom: 24px;
+        }
+
+        .bio-section, .server-card, .button-wall, .bottom-bar {
+            background-color: var(--active-bg-color);
+            border: 0.5px solid var(--main-border-color);
+            border-radius: 20px;
+            padding: 24px;
+            margin-bottom: 24px;
+            box-shadow: 0 1.5px 6px rgba(71, 58, 45, 0.05);
+        }
+
+        h2 {
+            color: var(--qwik-text);
+            font-size: 26px;
+            font-weight: 800;
+            border-bottom: 1px solid var(--main-border-color);
+            padding-bottom: 12px;
+            margin-top: 0;
+            margin-bottom: 16px;
+        }
+
+        h3 {
+            color: var(--qwik-text);
+            font-size: 22px;
+            font-weight: 800;
+            margin-top: 30px;
+            margin-bottom: 12px;
+        }
+
+        p {
+            margin-top: 0;
+            margin-bottom: 16px;
+            line-height: 1.5;
+        }
+
+        ul {
+            margin-top: 0;
+            margin-bottom: 16px;
+            padding-left: 0;
+            list-style-type: none;
+        }
+
+        li {
+            margin-bottom: 8px;
+            padding: 10px 15px;
+            background-color: var(--main-bg-color);
+            border-radius: 12px;
+        }
+
+        .button-wall {
+            text-align: center;
+        }
+
+        .button-wall img, .phone-images img {
+            border-radius: 8px;
+            margin: 6px;
+            vertical-align: middle;
+            max-width: 100%;
+            height: auto;
+            box-shadow: 0 2px 8px rgba(71, 58, 45, 0.1);
+        }
+
+        .quote {
+            font-style: italic;
+            color: #555555;
+            background-color: var(--main-bg-color);
+            padding: 16px;
+            border-radius: 12px;
+            margin: 16px 0;
+        }
+
+        code {
+            background-color: var(--main-bg-color);
+            color: var(--qwik-dark-blue);
+            padding: 4px 8px;
+            border-radius: 8px;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+            font-size: 16px;
+        }
+
+        .bottom-bar {
+            text-align: center;
+        }
+
+        .copy-btn {
+            background-color: var(--qwik-text);
+            color: #ffffff;
+            border: none;
+            border-radius: 20px;
+            font-family: Aeonik, Helvetica, sans-serif;
+            font-size: 18px;
+            font-weight: 800;
+            padding: 12px 24px;
+            cursor: pointer;
+            transition: transform 0.15s cubic-bezier(0.2, 0.9, 0.3, 1), opacity 0.15s ease;
+            margin-top: 10px;
+        }
+
+        .copy-btn:hover {
+            opacity: 0.85;
+            transform: scale(1.02);
+        }
+
+        .time-box {
+            background-color: var(--main-bg-color);
+            color: var(--qwik-text);
+            padding: 16px;
+            border-radius: 12px;
+            text-align: center;
+            font-size: 16px;
+            font-weight: 800;
+            margin-top: 20px;
+        }
+
+        .photo-credit {
+            font-size: 14px;
+            color: var(--faded-gray);
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                font-size: 18px;
+                padding: 10px;
+            }
+            .title {
+                font-size: 24px;
+            }
+            h2 {
+                font-size: 22px;
+            }
+            h3 {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="title">-_- VERVEX Host Infos!</div>
+
+        <div class="bio-section">
+            <p>Idk how long this site will be up, but if anything changes the link will stay the same:</p><a href="http://kck186.xo.je/">kck186.xo.je</a></p>
+
+            
+</body>
+</html>
