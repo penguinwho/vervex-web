@@ -180,15 +180,15 @@
     <div class="opt-group">
       <div class="opt-label mono">model</div>
       <div class="model-grid">
-        <div class="model-opt active" data-model="1" data-price="649">
+        <div class="model-opt active" data-model="1" data-price="399">
           <h4>Awesome Phone 1</h4>
           <div class="sub">GrapheneOS pre-installed · open-source</div>
-          <div class="price">from $649</div>
+          <div class="price">from $399</div>
         </div>
-        <div class="model-opt" data-model="1a" data-price="449">
+        <div class="model-opt" data-model="1a" data-price="299">
           <h4>Awesome Phone 1a</h4>
           <div class="sub">GrapheneOS pre-installed · build at home</div>
-          <div class="price">from $449</div>
+          <div class="price">from $299</div>
         </div>
       </div>
     </div>
@@ -207,20 +207,9 @@
       <div class="opt-label mono">storage</div>
       <div class="storage-row">
         <div class="storage-opt active" data-storage="128" data-add="0">128GB</div>
-        <div class="storage-opt" data-storage="256" data-add="100">256GB <span class="plus">+$100</span></div>
       </div>
     </div>
 
-    <div class="opt-group">
-      <div class="opt-label mono">kill switch rail</div>
-      <div class="toggle-row">
-        <div>
-          <div class="t-label">Hardware kill switch</div>
-          <div class="t-sub">Standard on every unit — not optional.</div>
-        </div>
-        <div class="switch-track on" style="pointer-events:none;"><div class="switch-knob"></div></div>
-      </div>
-    </div>
 
     <div class="opt-group">
       <div class="opt-label mono">quantity</div>
@@ -236,10 +225,11 @@
       <div class="summary-row"><span class="k">Finish</span><span class="v mono" id="sumColor">Graphite</span></div>
       <div class="summary-row"><span class="k">Storage</span><span class="v mono" id="sumStorage">128GB</span></div>
       <div class="summary-row"><span class="k">Quantity</span><span class="v mono" id="sumQty">1</span></div>
-      <div class="summary-total"><span class="k">Total</span><span class="v" id="sumTotal">$649</span></div>
+      <div class="summary-total"><span class="k">Total</span><span class="v" id="sumTotal">$399</span></div>
     </div>
 
-    <button class="buy-btn" id="buyBtn">Add to bag — Buy now</button>
+    <button class="buy-btn" id="payCardBtn">Pay with Card (Stripe)</button>
+    <button class="buy-btn" id="payCryptoBtn" style="margin-top:10px; background:transparent; color:var(--text); border:1px solid var(--line);">Pay with Crypto</button>
     <div class="buy-note">In the box: braided USB-C cable, precision SIM pin. Ships with kill switch installed.</div>
     <div class="confirm mono" id="confirmMsg"></div>
   </div>
@@ -261,7 +251,7 @@
 </div>
 
 <script>
-  const state = { model:'1', price:649, name:'Awesome Phone 1', color:'Graphite', hex1:'#33363a', hex2:'#09090a', storage:128, add:0, qty:1 };
+  const state = { model:'1', price:399, name:'Awesome Phone 1', color:'Graphite', hex1:'#33363a', hex2:'#09090a', storage:128, add:0, qty:1 };
 
   const modelOpts = document.querySelectorAll('.model-opt');
   const swatches = document.querySelectorAll('.swatch');
@@ -315,6 +305,36 @@
     const msg = document.getElementById('confirmMsg');
     msg.textContent = `ORDER_READY :: ${state.qty}x ${state.name} (${state.color}, ${state.storage}GB) — checkout would continue from here.`;
     msg.classList.add('show');
+  });
+
+  const API_BASE = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') ? 'http://localhost:4242' : '';
+
+  document.getElementById('payCardBtn').addEventListener('click', async () => {
+    try {
+      const resp = await fetch(API_BASE + '/create-checkout-session', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name: state.name, qty: state.qty, price: state.price })
+      });
+      const body = await resp.json();
+      if (body.url) window.location = body.url;
+      else alert(body.error || 'Failed to create checkout session');
+    } catch (err) {
+      console.error(err); alert('Error creating checkout session');
+    }
+  });
+
+  document.getElementById('payCryptoBtn').addEventListener('click', async () => {
+    try {
+      const resp = await fetch(API_BASE + '/create-coinbase-charge', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name: state.name, qty: state.qty, price: state.price })
+      });
+      const body = await resp.json();
+      if (body.url) window.open(body.url, '_blank');
+      else alert(body.error || 'Failed to create crypto charge');
+    } catch (err) {
+      console.error(err); alert('Error creating crypto charge');
+    }
   });
 
   render();
