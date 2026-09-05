@@ -3,116 +3,148 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Contact Vervex to discuss product design, web design, or digital projects with a thoughtful, modern studio.">
+  <meta name="theme-color" content="#171311">
+  <meta property="og:title" content="Contact Vervex">
+  <meta property="og:description" content="Share your idea and start a conversation with Vervex about design, product, and digital work.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://vervex.hu/contact.html">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="canonical" href="https://vervex.hu/contact.html">
   <title>Contact Vervex</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    *, *::before, *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
+    :root {
+      --bg: #f6f0ea;
+      --panel: rgba(255,255,255,0.74);
+      --panel-strong: #fffdfb;
+      --ink: #171311;
+      --muted: #665d57;
+      --line: rgba(23,19,17,0.08);
+      --shadow: 0 24px 80px rgba(23,19,17,0.08);
     }
 
+    * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      background: #f9f6f2;
-      color: #1a1510;
       font-family: "DM Sans", sans-serif;
+      background: radial-gradient(circle at top, rgba(255,255,255,0.96), #f6f0ea 35%);
+      color: var(--ink);
       min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 2rem;
-      text-align: center;
+      display: grid;
+      place-items: center;
+      padding: 2rem 1rem 4rem;
     }
+
+    a { color: inherit; text-decoration: none; }
 
     .page-card {
-      max-width: 720px; 
-      width: 100%;
-      background: rgba(255,255,255,0.95);
-      border: 1px solid rgba(0,0,0,0.08);
-      border-radius: 24px;
-      box-shadow: 0 30px 80px rgba(15,15,15,0.08);
-      padding: 3rem;
+      width: min(760px, 100%);
+      background: var(--panel-strong);
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+      padding: clamp(1.6rem, 3vw, 2.6rem);
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-bottom: 0.8rem;
+      font-size: 0.75rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 9px;
+      height: 9px;
+      background: #d1b59f;
+      border-radius: 50%;
+      box-shadow: 0 0 16px rgba(209,181,159,0.8);
     }
 
     h1 {
       font-family: "Bebas Neue", sans-serif;
-      font-size: clamp(3rem, 8vw, 5rem);
+      font-size: clamp(3rem, 7vw, 5rem);
+      line-height: 0.9;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
       margin-bottom: 1rem;
     }
 
-    p {
-      color: #5b5650;
+    .intro {
+      color: var(--muted);
       line-height: 1.8;
-      margin-bottom: 2rem;
-      font-size: 1rem;
+      margin-bottom: 1.5rem;
     }
 
     .contact-grid {
       display: grid;
       gap: 1rem;
-      margin-bottom: 2rem;
-      text-align: left;
+      margin-bottom: 1.5rem;
     }
 
     .contact-item {
-      background: #fbf8f4;
-      border: 1px solid rgba(0,0,0,0.06);
-      border-radius: 16px;
+      background: rgba(255,255,255,0.68);
+      border: 1px solid var(--line);
+      border-radius: 18px;
       padding: 1rem 1.2rem;
     }
 
     .contact-item span {
       display: block;
-      font-size: 0.85rem;
-      color: #8b827c;
-      margin-bottom: 0.3rem;
-      letter-spacing: 0.08em;
+      margin-bottom: 0.35rem;
+      font-size: 0.76rem;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
+      color: var(--muted);
+      font-weight: 700;
     }
 
     .contact-item a {
-      color: #1a1510;
-      text-decoration: none;
-      font-weight: 600;
-      word-break: break-all;
+      color: var(--ink);
+      font-weight: 700;
     }
 
     form {
-      margin-bottom: 1.75rem;
-      text-align: left;
+      display: grid;
+      gap: 0.9rem;
+      margin-top: 1.25rem;
     }
 
     label {
-      display: block;
-      margin-bottom: 0.5rem;
-      font-weight: 600;
-      color: #1a1510;
-      font-size: 0.95rem;
+      font-size: 0.92rem;
+      font-weight: 700;
     }
 
     input,
     textarea {
       width: 100%;
-      padding: 0.9rem 1rem;
-      border: 1px solid rgba(0,0,0,0.12);
-      border-radius: 12px;
-      font-size: 1rem;
-      margin-bottom: 1.25rem;
-      font-family: inherit;
-      background: #ffffff;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 0.95rem 1rem;
+      font: inherit;
+      background: rgba(255,255,255,0.8);
+      color: var(--ink);
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
     }
 
     input:focus,
     textarea:focus {
       outline: none;
-      border-color: #1a1510;
-      box-shadow: 0 0 0 4px rgba(26,21,16,0.05);
+      border-color: rgba(23,19,17,0.26);
+      box-shadow: 0 0 0 4px rgba(23,19,17,0.04);
     }
 
     textarea {
-      min-height: 140px;
+      min-height: 150px;
       resize: vertical;
     }
 
@@ -120,45 +152,38 @@
       display: flex;
       flex-wrap: wrap;
       gap: 1rem;
-      justify-content: center;
+      margin-top: 0.5rem;
     }
 
-    button[type="submit"] {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 0.9rem 2rem;
-      background: #1a1510;
-      color: #fff;
-      border: none;
-      border-radius: 10px;
-      font-weight: 700;
-      cursor: pointer;
-      transition: transform 0.2s ease, opacity 0.2s ease;
-    }
-
-    button[type="submit"]:hover {
-      transform: translateY(-2px);
-      opacity: 0.95;
-    }
-
+    button,
     .secondary-link {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      padding: 0.9rem 1.6rem;
-      min-width: 160px;
+      padding: 0.95rem 1.6rem;
       border-radius: 999px;
-      background: #f4f0ec;
-      color: #1a1510;
-      text-decoration: none;
+      border: none;
+      font: inherit;
       font-weight: 700;
-      transition: transform 0.2s ease, opacity 0.2s ease;
+      cursor: pointer;
+      transition: transform 0.2s ease;
     }
 
+    button {
+      background: var(--ink);
+      color: #fff;
+      box-shadow: 0 18px 30px rgba(23,19,17,0.12);
+    }
+
+    .secondary-link {
+      background: rgba(255,255,255,0.7);
+      border: 1px solid var(--line);
+      color: var(--ink);
+    }
+
+    button:hover,
     .secondary-link:hover {
       transform: translateY(-2px);
-      opacity: 0.95;
     }
 
     @media (min-width: 640px) {
@@ -170,8 +195,9 @@
 </head>
 <body>
   <div class="page-card">
-    <h1>Contact Vervex</h1>
-    <p>Have a question, feedback, or want to work together? Send a message and I’ll reply as soon as possible.</p>
+    <div class="eyebrow">Contact</div>
+    <h1>Say hello.</h1>
+    <p class="intro">Have an idea, a question, or a project you want to shape with care? Send a message and we’ll get back to you as soon as possible.</p>
 
     <div class="contact-grid">
       <div class="contact-item">
@@ -179,26 +205,36 @@
         <a href="mailto:pingvinvok@protonmail.com">pingvinvok@protonmail.com</a>
       </div>
       <div class="contact-item">
-        <span>Ask anything</span>
+        <span>General</span>
         <a href="mailto:pingvinvok@protonmail.com?subject=Contact%20from%20Vervex%20website">Send a note</a>
       </div>
     </div>
 
     <form id="contact-form">
-      <label for="name">Name</label>
-      <input id="name" name="name" type="text" placeholder="Your name" required>
+      <div>
+        <label for="name">Name</label>
+        <input id="name" name="name" type="text" placeholder="Your name" required>
+      </div>
 
-      <label for="email">Email</label>
-      <input id="email" name="email" type="email" placeholder="you@example.com" required>
+      <div>
+        <label for="email">Email</label>
+        <input id="email" name="email" type="email" placeholder="you@example.com" required>
+      </div>
 
-      <label for="message">Message</label>
-      <textarea id="message" name="message" placeholder="Write your message here" required></textarea>
+      <div>
+        <label for="message">Message</label>
+        <textarea id="message" name="message" placeholder="Tell us a little about your idea" required></textarea>
+      </div>
 
       <div class="button-row">
         <button type="submit">Send message</button>
-        <a class="secondary-link" href="index.html">Back to home</a>
+        <a class="secondary-link" href="index.html">Back home</a>
       </div>
     </form>
+
+    <p style="margin-top: 1rem; color: var(--muted); font-size: 0.92rem;">
+      <a href="privacy.html">Privacy Policy</a> · <a href="terms.html">Terms</a> · <a href="faq.html">FAQ</a>
+    </p>
   </div>
 
   <script>

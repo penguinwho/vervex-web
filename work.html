@@ -3,170 +3,259 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Explore Vervex projects, product experiments, and digital work spanning web design, systems thinking, and polished user experiences.">
+  <meta name="theme-color" content="#171311">
+  <meta property="og:title" content="Our Work | Vervex">
+  <meta property="og:description" content="A look at the design and product work behind Vervex, from interfaces to system-level experiments.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://vervex.hu/work.html">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="canonical" href="https://vervex.hu/work.html">
   <title>Our Work | Vervex</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    *, *::before, *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
+    :root {
+      --bg: #f6f0ea;
+      --panel: rgba(255,255,255,0.74);
+      --panel-strong: #fffdfb;
+      --ink: #171311;
+      --muted: #665d57;
+      --line: rgba(23,19,17,0.08);
+      --shadow: 0 24px 80px rgba(23,19,17,0.08);
     }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      background: #f9f6f2;
       font-family: "DM Sans", sans-serif;
+      background: radial-gradient(circle at top, rgba(255,255,255,0.95), #f6f0ea 35%);
+      color: var(--ink);
       min-height: 100vh;
-      color: #1a1510;
-      padding: 2rem;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
+      padding: 2rem 1rem 4rem;
     }
-    .nav-flip {
-      height: 62px;
-      background: rgba(249, 246, 242, 0.95);
-      border: 1px solid rgba(0, 0, 0, 0.08);
-      border-radius: 14px;
+
+    a { color: inherit; text-decoration: none; }
+
+    .page-shell {
+      width: min(1100px, 100%);
+      margin: 0 auto;
+      display: grid;
+      gap: 1.5rem;
+    }
+
+    .topbar {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 28px;
-      box-shadow: 0 20px 50px rgba(15, 15, 15, 0.08);
-      width: 100%;
-      max-width: 1100px;
-      margin-bottom: 3rem;
+      gap: 1rem;
+      padding: 0.9rem 1.2rem;
+      background: rgba(255,255,255,0.72);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      box-shadow: 0 18px 45px rgba(23,19,17,0.04);
+      backdrop-filter: blur(12px);
     }
-    .nav-flip__logo {
-      font-family: inherit;
-      font-size: 17px;
-      font-weight: 900;
-      color: #1a1510;
-      letter-spacing: 3px;
-      text-decoration: none;
-    }
-    .nav-flip__links {
-      list-style: none;
-      display: flex;
-      gap: 0.75rem;
-      margin: 0;
-      padding: 0;
-    }
-    .nav-flip__links a {
-      color: #4a4a4a;
-      text-decoration: none;
-      padding: 10px 14px;
-      font-size: 0.85rem;
-      font-weight: 600;
-      border-radius: 12px;
-      background: rgba(255,255,255,0.8);
-      border: 1px solid rgba(0,0,0,0.08);
-    }
-    .nav-flip__links a:hover,
-    .nav-flip__cta:hover {
-      background: #fff;
-      color: #1a1510;
-    }
-    .nav-flip__cta {
-      background: #1a1510;
-      color: #fff;
-      text-decoration: none;
-      border-radius: 8px;
-      padding: 9px 20px;
-      font-size: 13px;
-      font-weight: 800;
-    }
-    .work-hero {
-      max-width: 900px;
-      width: 100%;
-      margin-bottom: 2rem;
-    }
-    .work-hero h1 {
+
+    .brand {
       font-family: "Bebas Neue", sans-serif;
-      font-size: clamp(3.5rem, 8vw, 5.5rem);
-      line-height: 0.9;
-      margin-bottom: 0.75rem;
+      font-size: 1.6rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
     }
-    .work-hero p {
-      font-size: 1rem;
-      color: #5b5650;
-      line-height: 1.8;
-      max-width: 640px;
-      margin: 0 auto;
+
+    .nav {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      justify-content: center;
     }
-    .work-grid {
-      width: 100%;
-      max-width: 1100px;
-      display: grid;
-      gap: 1.5rem;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+
+    .nav a {
+      padding: 0.7rem 1rem;
+      border-radius: 12px;
+      border: 1px solid transparent;
+      color: var(--muted);
+      font-size: 0.92rem;
+      font-weight: 600;
+      transition: all 0.2s ease;
     }
-    .work-card {
-      background: #fff;
-      border: 1px solid rgba(0,0,0,0.08);
-      border-radius: 24px;
-      padding: 1.5rem;
-      text-align: left;
-      box-shadow: 0 18px 50px rgba(15,15,15,0.05);
+
+    .nav a:hover {
+      background: rgba(255,255,255,0.8);
+      border-color: var(--line);
+      color: var(--ink);
     }
-    .work-card h3 {
-      font-size: 1.2rem;
-      margin-bottom: 0.75rem;
+
+    .hero {
+      background: var(--panel-strong);
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+      padding: clamp(1.7rem, 3vw, 2.5rem);
     }
-    .work-card p {
-      color: #5b5650;
-      line-height: 1.75;
-      font-size: 0.95rem;
-    }
-    .work-card span {
-      display: inline-block;
-      margin-top: 1rem;
-      color: #888;
-      font-size: 0.85rem;
-    }
-    .work-card a {
-      display: inline-block;
-      margin-top: 1rem;
-      color: #1a1510;
-      text-decoration: none;
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-bottom: 0.8rem;
+      font-size: 0.75rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
       font-weight: 700;
     }
+
+    .eyebrow::before {
+      content: "";
+      width: 9px;
+      height: 9px;
+      background: #d1b59f;
+      border-radius: 50%;
+      box-shadow: 0 0 16px rgba(209,181,159,0.8);
+    }
+
+    h1 {
+      font-family: "Bebas Neue", sans-serif;
+      font-size: clamp(3rem, 7vw, 5rem);
+      line-height: 0.9;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-bottom: 0.8rem;
+    }
+
+    .hero p {
+      max-width: 700px;
+      color: var(--muted);
+      line-height: 1.8;
+      font-size: 1.05rem;
+    }
+
+    .work-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1rem;
+    }
+
+    .work-card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      box-shadow: 0 20px 52px rgba(23,19,17,0.04);
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.9rem;
+      min-height: 240px;
+    }
+
+    .work-card .tag {
+      display: inline-flex;
+      width: fit-content;
+      align-items: center;
+      padding: 0.45rem 0.7rem;
+      border-radius: 999px;
+      background: rgba(23,19,17,0.04);
+      border: 1px solid var(--line);
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .work-card h3 {
+      font-size: 1.7rem;
+      line-height: 1.1;
+    }
+
+    .work-card p {
+      color: var(--muted);
+      line-height: 1.75;
+    }
+
+    .work-card .meta {
+      margin-top: auto;
+      color: var(--muted);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .work-card a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: fit-content;
+      margin-top: 0.25rem;
+      padding: 0.7rem 1rem;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.7);
+      border: 1px solid var(--line);
+      font-weight: 700;
+      transition: transform 0.2s ease;
+    }
+
     .work-card a:hover {
-      text-decoration: underline;
+      transform: translateY(-2px);
+    }
+
+    @media (max-width: 720px) {
+      .topbar { flex-direction: column; padding: 1rem; }
     }
   </style>
 </head>
 <body>
-  <nav class="nav-flip">
-    <a class="nav-flip__logo" href="index.html">VERVEX</a>
-    <ul class="nav-flip__links">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="work.html">Work</a></li>
-      <li><a href="about.html">About</a></li>
-      <li><a href="contact.html">Contact</a></li>
-    </ul>
-    <a class="nav-flip__cta" href="join.html">Join now</a>
-  </nav>
+  <a class="skip-link" href="#main-content" style="position:absolute;left:-9999px;top:0;background:#171311;color:#fff;padding:0.8rem 1rem;border-radius:0 0 12px 12px;z-index:100;">Skip to content</a>
+  <div class="page-shell">
+    <header class="topbar">
+      <a class="brand" href="index.html">Vervex</a>
+      <nav class="nav" aria-label="Main navigation">
+        <a href="index.html">Home</a>
+        <a href="work.html">Work</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </header>
 
-  <section class="work-hero">
-    <h1>Our Work</h1>
-    <p>Explore a selection of clean, minimal projects designed for clarity, conversion, and craftsmanship. This is where our best work lives.</p>
-  </section>
+    <main id="main-content">
+      <section class="hero">
+        <div class="eyebrow">Selected work</div>
+        <h1>Our work</h1>
+        <p>We care about product clarity, thoughtful experiences, and work that feels precise from the first glance through the final interaction.</p>
+      </section>
 
-  <section class="work-grid">
-    <article class="work-card">
-      <h3>NightOS</h3>
-      <p>A custom Arch-based Linux distro built for sleek minimalism, fast boot, and a polished user experience.</p>
-      <span>Arch Distro | Linux</span>
-      <a href="https://github.com/penguinwho/NightOS" target="_blank" rel="noopener noreferrer">View on GitHub</a>
-    </article>
-    <article class="work-card">
-      <h3>Night-Kernel</h3>
-      <p>Developed a custom kernel for NightOS with low-level system control and custom hardware integration.</p>
-      <span>Kernel | Systems</span>
-      <a href="https://github.com/penguinwho/Night-Kernel" target="_blank" rel="noopener noreferrer">View on GitHub</a>
-    </article>
-  </section>
+    <section class="work-grid">
+      <article class="work-card">
+        <span class="tag">OS / Linux</span>
+        <h3>NightOS</h3>
+        <p>A minimal operating system experience built for speed, control, and a calmer digital rhythm.</p>
+        <div class="meta">Arch distro · linux</div>
+        <a href="https://github.com/penguinwho/NightOS" target="_blank" rel="noreferrer">View project</a>
+      </article>
+
+      <article class="work-card">
+        <span class="tag">Kernel / Systems</span>
+        <h3>Night-Kernel</h3>
+        <p>Custom kernel work focused on performance tuning, system control, and refined low-level architecture.</p>
+        <div class="meta">Kernel · systems</div>
+        <a href="https://github.com/penguinwho/Night-Kernel" target="_blank" rel="noreferrer">View project</a>
+      </article>
+
+      <article class="work-card">
+        <span class="tag">Web / Product</span>
+        <h3>Vervex studio</h3>
+        <p>A design-led digital presence that balances elegance, speed, and meaningful content without clutter.</p>
+        <div class="meta">Brand · web</div>
+        <a href="index.html">Open site</a>
+      </article>
+    </section>
+
+    <div style="padding:1rem 0 0; text-align:center; color:#665d57; font-size:0.9rem;">
+      <a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a> · <a href="faq.html">FAQ</a>
+    </div>
+    </main>
+  </div>
 </body>
 </html>
