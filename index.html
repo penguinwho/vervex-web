@@ -34,20 +34,18 @@
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
     body {
-      background:
-        radial-gradient(circle at top, rgba(255,255,255,0.95), rgba(246,240,234,1) 38%),
-        var(--bg);
+      background: var(--bg);
       color: var(--ink);
       font-family: "DM Sans", sans-serif;
       min-height: 100vh;
-      padding: 2rem 1.2rem 4rem;
+      padding: 1.25rem 1rem 3rem;
       line-height: 1.6;
     }
     img { max-width: 100%; display: block; }
     a { color: inherit; text-decoration: none; }
 
     .container {
-      width: min(1120px, 100%);
+      width: min(1100px, 100%);
       margin: 0 auto;
     }
 
@@ -56,14 +54,13 @@
       align-items: center;
       justify-content: space-between;
       gap: 1rem;
-      width: min(1120px, 100%);
-      margin: 0 auto 2.5rem;
-      background: rgba(255,255,255,0.7);
-      border: 1px solid var(--line);
-      border-radius: 18px;
-      backdrop-filter: blur(12px);
-      box-shadow: 0 18px 48px rgba(23, 19, 17, 0.04);
-      padding: 0.85rem 1.2rem;
+      width: min(1100px, 100%);
+      margin: 0 auto 1.25rem;
+      background: transparent;
+      border: 0;
+      border-bottom: 1px solid var(--line);
+      border-radius: 0;
+      padding: 0 0 0.75rem;
     }
 
     .brand {
@@ -82,18 +79,18 @@
     }
 
     .nav a {
-      padding: 0.7rem 1rem;
-      border-radius: 12px;
+      padding: 0.2rem 0.1rem;
+      border-radius: 0;
       color: var(--muted);
-      font-size: 0.92rem;
+      font-size: 0.9rem;
       font-weight: 600;
-      border: 1px solid transparent;
-      transition: all 0.2s ease;
+      border: 0;
+      transition: none;
     }
 
     .nav a:hover {
-      background: rgba(255,255,255,0.8);
-      border-color: var(--line);
+      background: transparent;
+      border-color: transparent;
       color: var(--ink);
     }
 
@@ -112,20 +109,21 @@
     .cta-button {
       background: var(--ink);
       color: #fff;
-      padding: 0.95rem 1.6rem;
-      box-shadow: 0 18px 30px rgba(23, 19, 17, 0.12);
+      padding: 0.75rem 1rem;
+      box-shadow: none;
     }
 
     .secondary-button {
-      background: rgba(255,255,255,0.42);
+      background: transparent;
       color: var(--ink);
-      padding: 0.95rem 1.6rem;
+      padding: 0.75rem 1rem;
+      border-color: rgba(23,19,17,0.2);
     }
 
     .cta-button:hover,
     .secondary-button:hover,
     .inline-link:hover {
-      transform: translateY(-2px);
+      transform: none;
     }
 
     .hero {
@@ -341,11 +339,11 @@
     }
 
     .panel {
-      background: rgba(255,255,255,0.7);
+      background: #f9f5f1;
       border: 1px solid var(--line);
-      border-radius: 28px;
-      padding: clamp(1.4rem, 2vw, 2rem);
-      box-shadow: 0 20px 52px rgba(23,19,17,0.04);
+      border-radius: 18px;
+      padding: clamp(1.2rem, 2vw, 1.6rem);
+      box-shadow: none;
     }
 
     .section-heading {
@@ -417,13 +415,13 @@
     }
 
     .project-card {
-      background: linear-gradient(180deg, rgba(255,255,255,0.9), rgba(249,242,236,0.8));
+      background: #f7f1eb;
       border: 1px solid var(--line);
-      border-radius: 24px;
-      padding: 1.3rem;
+      border-radius: 16px;
+      padding: 1.1rem;
       display: grid;
-      gap: 1rem;
-      min-height: 260px;
+      gap: 0.9rem;
+      min-height: 220px;
     }
 
     .project-tag {
@@ -464,11 +462,11 @@
       justify-content: space-between;
       align-items: center;
       gap: 1rem;
-      background: linear-gradient(135deg, rgba(23,19,17,1), rgba(63,52,47,1));
+      background: #171311;
       color: #f7f1ec;
-      border-radius: 30px;
-      padding: clamp(1.4rem, 3vw, 2.4rem);
-      box-shadow: 0 18px 50px rgba(23,19,17,0.18);
+      border-radius: 16px;
+      padding: 1.3rem 1.4rem;
+      box-shadow: none;
     }
 
     .cta-banner h3 {
@@ -552,7 +550,6 @@
       <a href="index.html">Home</a>
       <a href="work.html">Work</a>
       <a href="about.html">About</a>
-      <a href="awsomephone.html">IoT</a>
       <a href="contact.html">Contact</a>
     </nav>
     <a href="join.html" class="cta-button">Join now</a>
@@ -561,26 +558,26 @@
   <main id="main-content" class="container">
     <section class="hero">
       <div>
-        <div class="eyebrow">Designing better digital experiences</div>
-        <h1>Build a sharper future.</h1>
-        <p class="lead">Vervex blends product design, engineering, and community thinking to create crisp, human-centered experiences for ambitious teams and ideas.</p>
+        <div class="eyebrow">quiet digital work</div>
+        <h1>Small tools. Better thinking.</h1>
+        <p class="lead">Vervex makes websites and product ideas that are useful, plain, and a little less obsessed with looking impressive.</p>
         <div class="button-row">
-          <a href="work.html" class="cta-button">See our work</a>
-          <a href="contact.html" class="secondary-button">Let’s talk</a>
+          <a href="work.html" class="cta-button">View work</a>
+          <a href="contact.html" class="secondary-button">Contact</a>
         </div>
 
         <div class="stats">
           <div class="stat">
             <strong>12+</strong>
-            <span>Projects</span>
+            <span>projects</span>
           </div>
           <div class="stat">
-            <strong>4.9/5</strong>
-            <span>Client love</span>
+            <strong>100%</strong>
+            <span>less hype</span>
           </div>
           <div class="stat">
-            <strong>24/7</strong>
-            <span>Momentum</span>
+            <strong>0</strong>
+            <span>bullshit</span>
           </div>
         </div>
       </div>
@@ -623,34 +620,34 @@
       <section class="panel">
         <div class="section-heading">
           <h2>What we do</h2>
-          <p>We make software and brand experiences that balance beauty, speed, and usability without unnecessary complexity.</p>
+          <p>Simple work. A bit of design. A bit of code. Nothing fake.</p>
         </div>
 
         <div class="services-grid">
           <article class="service-card">
             <div class="service-icon">✦</div>
-            <h3>Brand systems</h3>
-            <p>Messaging, identity, and visual direction that make products memorable and trustworthy.</p>
+            <h3>Brand</h3>
+            <p>Names, tone, and visual direction that feel human instead of templated.</p>
           </article>
 
           <article class="service-card">
             <div class="service-icon">▣</div>
-            <h3>Product design</h3>
-            <p>Interfaces built for clarity, conversion, and real-world interaction patterns.</p>
+            <h3>Product</h3>
+            <p>Interfaces that are clear and useful without trying to win a design award.</p>
           </article>
 
           <article class="service-card">
             <div class="service-icon">◎</div>
-            <h3>Web experiences</h3>
-            <p>Fast, polished digital experiences that turn attention into action with ease.</p>
+            <h3>Web</h3>
+            <p>Small websites and tools built to be usable, not performative.</p>
           </article>
         </div>
       </section>
 
       <section class="panel">
         <div class="section-heading">
-          <h2>Featured work</h2>
-          <p>Selected projects and experiments built around thoughtful execution and clean, confident design.</p>
+          <h2>Selected work</h2>
+          <p>Side projects, experiments, and useful things built without the usual nonsense.</p>
         </div>
 
         <div class="showcase-grid">
@@ -658,7 +655,7 @@
             <span class="project-tag">OS / Linux</span>
             <div>
               <h3>NightOS</h3>
-              <p>A refined operating system experience focused on performance, minimalism, and calm productivity.</p>
+              <p>A quieter desktop feel for people who want less clutter and more focus.</p>
             </div>
             <a class="inline-link" href="https://github.com/penguinwho/NightOS" target="_blank" rel="noreferrer">View project</a>
           </article>
@@ -667,28 +664,28 @@
             <span class="project-tag">Kernel / Systems</span>
             <div>
               <h3>Night-Kernel</h3>
-              <p>Custom system work exploring lower-level control, sharper performance, and intentional hardware integration.</p>
+              <p>Low-level work with a practical focus and less ego in the design.</p>
             </div>
             <a class="inline-link" href="https://github.com/penguinwho/Night-Kernel" target="_blank" rel="noreferrer">View project</a>
           </article>
 
           <article class="project-card">
-            <span class="project-tag">IoT / Hardware</span>
+            <span class="project-tag">Hardware</span>
             <div>
-              <h3>AWESIM</h3>
-              <p>A privacy-first mobile hardware concept built around a physical kill switch, secure defaults, and open-source trust.</p>
+              <h3>Side project</h3>
+              <p>Small, useful builds and experiments without the usual startup noise.</p>
             </div>
-            <a class="inline-link" href="awsomephone.html">Explore device</a>
+            <a class="inline-link" href="work.html">See more</a>
           </article>
         </div>
       </section>
 
       <section class="cta-banner">
         <div>
-          <h3>Ready to build something better?</h3>
-          <p>Let’s turn a rough idea into a product people actually enjoy using.</p>
+          <h3>Need a simpler build?</h3>
+          <p>We can do something useful without all the fake startup polish.</p>
         </div>
-        <a href="contact.html" class="secondary-button" style="background: #f2e9e1; color: #1b1715; border-color: transparent;">Start a project</a>
+        <a href="contact.html" class="secondary-button" style="background: #f2e9e1; color: #1b1715; border-color: transparent;">Contact</a>
       </section>
     </div>
   </main>
@@ -698,33 +695,73 @@
     <div class="footer-links">
       <a href="work.html">Work</a>
       <a href="about.html">About</a>
-      <a href="awsomephone.html">IoT</a>
       <a href="contact.html">Contact</a>
       <a href="join.html">Join</a>
       <a href="privacy.html">Privacy</a>
       <a href="terms.html">Terms</a>
       <a href="faq.html">FAQ</a>
     </div>
+    <div class="footer-social" style="display:flex;align-items:center;gap:0.7rem;flex-wrap:wrap;">
+      <a href="https://github.com/penguinwho" target="_blank" rel="noreferrer" aria-label="GitHub" style="display:inline-flex;align-items:center;justify-content:center;width:2rem;height:2rem;border:1px solid var(--line);border-radius:999px;color:var(--muted);background:rgba(255,255,255,0.3);">
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M12 .5a12 12 0 0 0-3.8 23.4c.6.1.8-.2.8-.6v-2.1c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1.1-.7.1-.7.1-.7 1.2.1 1.9 1.3 1.9 1.3 1.1 1.9 2.9 1.4 3.6 1 .1-.8.4-1.4.8-1.7-2.6-.3-5.3-1.3-5.3-5.8 0-1.3.5-2.4 1.3-3.2-.1-.3-.6-1.5.1-3.2 0 0 1.1-.4 3.4 1.3a11.4 11.4 0 0 1 6.2 0c2.3-1.7 3.4-1.3 3.4-1.3.7 1.7.2 2.9.1 3.2.8.8 1.3 1.9 1.3 3.2 0 4.5-2.7 5.5-5.3 5.8.4.4.8 1.1.8 2.2v3.3c0 .4.2.7.8.6A12 12 0 0 0 12 .5Z"/></svg>
+      </a>
+      <a href="https://bsky.app/profile/vervex.hu" target="_blank" rel="noreferrer" aria-label="Bluesky" style="display:inline-flex;align-items:center;justify-content:center;width:2rem;height:2rem;border:1px solid rgba(23,19,17,0.18);border-radius:999px;background:#171311;color:#f7f4f1;">
+        <svg viewBox="0 0 24 24" width="12" height="12" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+          <path d="M7 6.6c1.8 0 3.3 1 4 2.5.7-1.5 2.2-2.5 4-2.5-.9 0-1.8.4-2.4 1.2-.8 1.1-1.1 2.4-1.1 3.8 0 1.4.3 2.7 1.1 3.8.6.8 1.5 1.2 2.4 1.2-1.8 0-3.3-1-4-2.5-.7 1.5-2.2 2.5-4 2.5.9 0 1.8-.4 2.4-1.2.8-1.1 1.1-2.4 1.1-3.8 0-1.4-.3-2.7-1.1-3.8-.6-.8-1.5-1.2-2.4-1.2Z" fill="currentColor"/>
+        </svg>
+      </a>
+      <button type="button" id="cookie-settings" style="display:inline-flex;align-items:center;justify-content:center;border:1px solid var(--line);border-radius:999px;background:rgba(255,255,255,0.3);color:var(--muted);padding:0.45rem 0.75rem;font:inherit;font-size:0.68rem;letter-spacing:0.08em;text-transform:uppercase;cursor:pointer;">Cookies</button>
+    </div>
   </footer>
 
-  <div id="cookie-banner" style="position:fixed;left:1rem;right:1rem;bottom:1rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;padding:1rem 1.2rem;border-radius:18px;background:rgba(23,19,17,0.96);color:#f6f0ea;border:1px solid rgba(255,255,255,0.12);box-shadow:0 22px 60px rgba(0,0,0,0.2);z-index:20;max-width:720px;margin:0 auto;">
-    <p style="margin:0;line-height:1.5; color:#f3ece7;">We use basic cookies to improve the site experience. By continuing, you agree to our <a href="privacy.html" style="color:#fff; text-decoration:underline;">Privacy Policy</a>.</p>
-    <button type="button" id="accept-cookies" style="background:#f6f0ea;color:#171311;border:none;border-radius:999px;padding:0.8rem 1.2rem;font-weight:700;cursor:pointer;">Accept</button>
+  <div id="cookie-banner" style="position:fixed;left:1rem;right:1rem;bottom:1rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;padding:0.9rem 1rem;border-radius:14px;background:#f7f4f1;color:#201d1a;border:1px solid rgba(32,29,26,0.08);box-shadow:0 18px 40px rgba(0,0,0,0.12);z-index:20;max-width:700px;margin:0 auto;">
+    <p style="margin:0;line-height:1.5; color:#3a332f; font-size:0.95rem;">We use one tiny cookie to remember your choice. No ad trackers, no giant-company surveillance, and no creepy data-sharing. We like privacy-first tools like Priscaxy more than the usual big-company playbook. <a href="privacy.html" style="color:#201d1a; text-decoration:underline;">Privacy Policy</a>.</p>
+    <div style="display:flex;gap:0.7rem;flex-wrap:wrap;">
+      <button type="button" id="decline-cookies" style="background:transparent;color:#201d1a;border:1px solid rgba(32,29,26,0.15);border-radius:999px;padding:0.7rem 1rem;font-weight:600;cursor:pointer;font-size:0.9rem;">No thanks</button>
+      <button type="button" id="accept-cookies" style="background:#201d1a;color:#f7f4f1;border:none;border-radius:999px;padding:0.7rem 1.1rem;font-weight:600;cursor:pointer;font-size:0.9rem;">Fine</button>
+    </div>
   </div>
 
   <script>
     (function () {
       var banner = document.getElementById('cookie-banner');
       var acceptButton = document.getElementById('accept-cookies');
-      if (!banner || !acceptButton) return;
-      if (localStorage.getItem('vervex-cookies-accepted') === 'true') {
-        banner.style.display = 'none';
-        return;
+      var declineButton = document.getElementById('decline-cookies');
+      var cookieSettingsButton = document.getElementById('cookie-settings');
+
+      function showBanner() {
+        if (banner) banner.style.display = 'flex';
       }
+
+      function hideBanner() {
+        if (banner) banner.style.display = 'none';
+      }
+
+      if (!banner || !acceptButton || !declineButton) return;
+
+      var cookieStatus = localStorage.getItem('vervex-cookies-status');
+      if (cookieStatus === 'accepted' || cookieStatus === 'declined') {
+        hideBanner();
+      } else {
+        showBanner();
+      }
+
       acceptButton.addEventListener('click', function () {
-        localStorage.setItem('vervex-cookies-accepted', 'true');
-        banner.style.display = 'none';
+        localStorage.setItem('vervex-cookies-status', 'accepted');
+        hideBanner();
       });
+
+      declineButton.addEventListener('click', function () {
+        localStorage.setItem('vervex-cookies-status', 'declined');
+        hideBanner();
+      });
+
+      if (cookieSettingsButton) {
+        cookieSettingsButton.addEventListener('click', function () {
+          localStorage.removeItem('vervex-cookies-status');
+          showBanner();
+        });
+      }
     })();
   </script>
 </body>
