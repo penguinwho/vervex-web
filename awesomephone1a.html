@@ -1,418 +1,103 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Awesome Phone 1 — Privacy. By default.</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --bg:#050506; --surface:#0c0d0f; --surface-2:#111316; --line:#1d2024;
-    --text:#eef1f0; --text-dim:#7d8790; --text-faint:#454b50;
-    --on:#39ff88; --on-dim:rgba(57,255,136,0.18);
-    --off:#ff5252; --off-dim:rgba(255,82,82,0.18);
-    --paper:#eef1ee; --paper-dim:#5b6360;
-  }
-  *{margin:0;padding:0;box-sizing:border-box;}
-  html{scroll-behavior:smooth;}
-  body{
-    background:var(--bg); color:var(--text);
-    font-family:'Inter',-apple-system,sans-serif;
-    -webkit-font-smoothing:antialiased; overflow-x:hidden;
-  }
-  h1,h2,.display{ font-family:'Space Grotesk',sans-serif; }
-  .mono{ font-family:'JetBrains Mono',monospace; }
-  @media (prefers-reduced-motion: reduce){ *{animation-duration:.01ms !important; transition-duration:.01ms !important; scroll-behavior:auto !important;} }
-  a{color:inherit;text-decoration:none;}
-
-  /* NAV — status-bar style */
-  nav{
-    position:fixed; top:0; left:0; right:0; z-index:200; height:48px;
-    display:flex; align-items:center; justify-content:center;
-    background:rgba(5,5,6,0.82); backdrop-filter:blur(20px) saturate(160%);
-    border-bottom:1px solid var(--line);
-  }
-  .nav-row{ width:100%; max-width:1100px; padding:0 22px; display:flex; align-items:center; justify-content:space-between; }
-  .nav-row .wordmark{ font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:14px; letter-spacing:0.01em; display:flex; align-items:center; gap:9px; }
-  .nav-row .wordmark .dot{ width:7px; height:7px; border-radius:50%; background:var(--on); box-shadow:0 0 8px var(--on); animation:pulseDot 2.4s ease-in-out infinite; }
-  @keyframes pulseDot{ 0%,100%{ opacity:1; } 50%{ opacity:.4; } }
-  .nav-row .links{ display:flex; gap:28px; font-size:12px; color:var(--text-dim); }
-  .nav-row .links a{ transition:color .2s; }
-  .nav-row .links a:hover{ color:var(--text); }
-  .nav-row .buy{ font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.04em; border:1px solid var(--line); padding:7px 14px; border-radius:4px; transition:border-color .2s,color .2s; color:var(--text-dim); }
-  .nav-row .buy:hover{ border-color:var(--on); color:var(--on); }
-  @media (max-width:760px){ .nav-row .links{ display:none; } }
-
-  /* HERO */
-  .hero{
-    min-height:100vh; display:flex; flex-direction:column; align-items:center;
-    padding:130px 20px 80px; text-align:center; position:relative; overflow:hidden;
-  }
-  .hero::before{
-    content:''; position:absolute; top:-10%; left:50%; width:120vw; height:70vh;
-    background:radial-gradient(ellipse at center, rgba(57,255,136,0.07), transparent 65%);
-    transform:translateX(-50%); animation:glowDrift 9s ease-in-out infinite; pointer-events:none;
-  }
-  @keyframes glowDrift{ 0%,100%{ opacity:.7; transform:translateX(-50%) scale(1); } 50%{ opacity:1; transform:translateX(-50%) scale(1.06); } }
-  .hero > *{ position:relative; z-index:1; }
-  .eyebrow{
-    font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:.14em; text-transform:uppercase;
-    color:var(--text-dim); margin-bottom:16px;
-  }
-  .eyebrow::before{ content:'// '; color:var(--on); }
-  .hero .eyebrow{ opacity:0; animation:fadeUp .7s .05s forwards; }
-  .hero h1{
-    font-size:clamp(42px,8.4vw,88px); font-weight:600; letter-spacing:-0.02em; line-height:1.02;
-    opacity:0; animation:fadeUp .7s .15s forwards;
-  }
-  .hero .tagline{ font-size:clamp(18px,2.2vw,24px); font-weight:400; margin-top:12px; color:var(--text-dim); opacity:0; animation:fadeUp .7s .28s forwards; }
-  .hero .links{ margin-top:26px; display:flex; gap:26px; font-size:15px; opacity:0; animation:fadeUp .7s .4s forwards; }
-  .hero .links a{ color:var(--on); font-family:'JetBrains Mono',monospace; font-size:13px; }
-  .hero .links a:hover{ text-decoration:underline; }
-  @keyframes fadeUp{ from{ opacity:0; transform:translateY(14px); } to{ opacity:1; transform:translateY(0); } }
-
-  /* oscilloscope trace */
-  .scope{ margin-top:54px; width:min(360px,80vw); opacity:0; animation:fadeUp .8s .5s forwards; }
-  .scope-label{ display:flex; justify-content:space-between; font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.06em; color:var(--text-faint); margin-bottom:6px; text-transform:uppercase; }
-  .scope-label #scopeState{ color:var(--off); transition:color .3s; }
-  .scope-box{ border:1px solid var(--line); border-radius:8px; background:var(--surface); padding:10px 14px; }
-  .scope-path{ stroke:var(--off); stroke-width:1.6; fill:none; transition:stroke .3s; }
-  .scope-path.live{ stroke:var(--on); animation:tracein 1.4s linear infinite; }
-  @keyframes tracein{ from{ stroke-dashoffset:200; } to{ stroke-dashoffset:0; } }
-
-  /* phone */
-  .phone-wrap{ margin-top:44px; display:flex; justify-content:center; }
-  .phone{
-    width:min(260px,58vw); filter:drop-shadow(0 40px 70px rgba(0,0,0,0.7));
-    opacity:0; transform:translateY(40px) scale(.94);
-    animation:phoneIn 1s cubic-bezier(.2,.8,.2,1) .55s forwards, phoneFloat 5s ease-in-out 1.5s infinite;
-  }
-  @keyframes phoneIn{ to{ opacity:1; transform:translateY(0) scale(1); } }
-  @keyframes phoneFloat{ 0%,100%{ transform:translateY(0); } 50%{ transform:translateY(-9px); } }
-
-  /* switch */
-  .switch-row{ margin-top:36px; display:flex; align-items:center; gap:14px; opacity:0; animation:fadeUp .7s 1.1s forwards; }
-  .switch-track{ width:56px; height:22px; border-radius:11px; background:var(--surface-2); border:1px solid var(--line); position:relative; cursor:pointer; transition:box-shadow .3s,border-color .3s; }
-  .switch-knob{ position:absolute; top:2px; left:2px; width:16px; height:16px; border-radius:50%; background:#c9cccb; transition:transform .3s cubic-bezier(.5,1.5,.5,1); }
-  .switch-track.on{ box-shadow:0 0 14px var(--on-dim); border-color:rgba(57,255,136,.4); }
-  .switch-track.on .switch-knob{ transform:translateX(32px); background:#eafff0; }
-  .switch-status{ font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.05em; color:var(--text-dim); text-transform:uppercase; }
-
-  /* generic section */
-  section{ padding:130px 20px; }
-  .inner{ max-width:1080px; margin:0 auto; }
-  .feature{ text-align:center; }
-  .feature h2{ font-size:clamp(32px,5.6vw,58px); font-weight:600; letter-spacing:-0.02em; line-height:1.06; max-width:760px; margin:0 auto; }
-  .feature p.lede{ font-size:clamp(16px,1.9vw,19px); color:var(--text-dim); max-width:600px; margin:18px auto 0; line-height:1.6; }
-  .light{ background:var(--paper); color:#0d0f0e; }
-  .light .eyebrow{ color:var(--paper-dim); }
-  .light .eyebrow::before{ color:#1c9c58; }
-  .light p.lede{ color:var(--paper-dim); }
-  .light .spec-table th, .light .spec-table td{ border-color:#cfd4d0; }
-  .light .spec-table td.row-label{ color:var(--paper-dim); }
-
-  .reveal{ opacity:0; transform:translateY(24px); transition:opacity .8s ease, transform .8s ease; }
-  .reveal.in{ opacity:1; transform:translateY(0); }
-  .stagger > *{ opacity:0; }
-  .reveal.in .stagger > *{ transform:translateY(18px); animation:staggerIn .7s ease forwards; }
-  .reveal.in .stagger > *:nth-child(1){ animation-delay:.05s; }
-  .reveal.in .stagger > *:nth-child(2){ animation-delay:.18s; }
-  .reveal.in .stagger > *:nth-child(3){ animation-delay:.31s; }
-  @keyframes staggerIn{ to{ opacity:1; transform:translateY(0); } }
-
-  /* rail visual */
-  .rail-visual{ margin-top:56px; display:flex; justify-content:center; }
-  .rail{ width:min(140px,38vw); }
-
-  /* camera visuals */
-  .camera-visual{ margin-top:56px; display:flex; justify-content:center; gap:56px; flex-wrap:wrap; }
-  .camera-block{ text-align:center; }
-  .camera-block .label{ font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--text-dim); margin-top:14px; letter-spacing:.02em; }
-  .light .camera-block .label{ color:var(--paper-dim); }
-  .lens .glint{ animation:glint 3.2s ease-in-out infinite; }
-  .lens.wide .glint{ animation-delay:.5s; }
-  @keyframes glint{ 0%,100%{ opacity:.15; } 50%{ opacity:.85; } }
-  .cam-pop{ opacity:0; transform:scale(.8); animation:camPop .6s cubic-bezier(.2,.8,.2,1) forwards; }
-  @keyframes camPop{ to{ opacity:1; transform:scale(1); } }
-  .in .cam-pop.two{ animation-delay:.15s; }
-
-  /* spec table */
-  .compare-wrap{ overflow-x:auto; margin-top:64px; }
-  table.spec-table{ width:100%; border-collapse:collapse; min-width:600px; }
-  .spec-table th{ text-align:left; font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.05em; text-transform:uppercase; font-weight:500; color:var(--text-dim); padding:14px 16px; border-bottom:1px solid var(--line); }
-  .spec-table td{ padding:16px; font-size:15px; border-bottom:1px solid var(--line); }
-  .spec-table td.row-label{ color:var(--text-dim); font-family:'JetBrains Mono',monospace; font-size:12px; text-transform:uppercase; letter-spacing:.03em; }
-  .spec-table th.col{ text-align:center; font-family:'Space Grotesk',sans-serif; font-size:16px; text-transform:none; letter-spacing:0; }
-  .spec-table td.col{ text-align:center; }
-  .check{ color:var(--on); font-weight:700; }
-
-  /* unbox */
-  .unbox-row{ display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line); margin-top:56px; border:1px solid var(--line); border-radius:14px; overflow:hidden; }
-  @media (max-width:700px){ .unbox-row{ grid-template-columns:1fr; } }
-  .unbox-cell{ background:var(--bg); padding:42px 28px; text-align:center; }
-  .unbox-cell h4{ font-family:'Space Grotesk',sans-serif; font-size:16px; font-weight:600; margin-bottom:10px; }
-  .unbox-cell p{ font-size:13px; color:var(--text-dim); line-height:1.6; }
-
-  /* CTA close */
-  .close-cta{ text-align:center; padding:150px 20px; }
-  .close-cta h2{ font-size:clamp(30px,5vw,52px); font-weight:600; letter-spacing:-0.02em; margin-bottom:20px; }
-  .close-cta .links{ display:flex; justify-content:center; gap:26px; }
-  .close-cta .links a{ color:var(--on); font-family:'JetBrains Mono',monospace; font-size:13px; }
-
-  footer{ background:var(--paper); color:#0d0f0e; padding:34px 20px; font-size:12px; }
-  .footer-inner{ max-width:1080px; margin:0 auto; }
-  .footer-inner .legal{ font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--paper-dim); border-bottom:1px solid #cfd4d0; padding-bottom:20px; margin-bottom:16px; line-height:1.7; }
-  .footer-links{ display:flex; flex-wrap:wrap; gap:0; color:var(--paper-dim); }
-  .footer-links a{ padding-right:12px; margin-right:12px; border-right:1px solid #cfd4d0; }
-  .footer-links a:last-child{ border-right:none; }
-
-  /* fixed bottom signal strip — signature element */
-  .signal-strip{
-    position:fixed; bottom:0; left:0; right:0; z-index:200; height:34px;
-    display:flex; align-items:center; justify-content:center;
-    background:rgba(5,5,6,0.9); backdrop-filter:blur(14px);
-    border-top:1px solid var(--line);
-    font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.06em; text-transform:uppercase;
-  }
-  .signal-strip-row{ display:flex; gap:22px; color:var(--text-faint); }
-  .signal-strip-row .seg{ display:flex; align-items:center; gap:6px; }
-  .signal-strip-row .seg .led{ width:6px; height:6px; border-radius:50%; background:var(--off); transition:background .3s, box-shadow .3s; }
-  .signal-strip-row .seg.live .led{ background:var(--on); box-shadow:0 0 6px var(--on); }
-  body{ padding-bottom:34px; }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vervex</title>
+  <style>
+    :root {
+      --bg: #111111;
+      --panel: #171717;
+      --line: #2a2a2a;
+      --text: #f4f0eb;
+      --muted: #b5ada4;
+      --accent: #d7c7b2;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.6;
+    }
+    a { color: inherit; text-decoration: none; }
+    nav {
+      border-bottom: 1px solid var(--line);
+      background: rgba(17,17,17,0.96);
+      position: sticky;
+      top: 0;
+    }
+    .nav-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 16px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+    .brand { font-weight: 700; letter-spacing: 0.04em; }
+    .links { display: flex; flex-wrap: wrap; gap: 18px; color: var(--muted); }
+    main {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 64px 20px 96px;
+    }
+    .eyebrow {
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      font-size: 11px;
+      margin-bottom: 16px;
+    }
+    h1 {
+      margin: 0 0 18px;
+      font-size: clamp(2.3rem, 5vw, 4rem);
+      line-height: 1.05;
+      letter-spacing: -0.04em;
+    }
+    p { color: var(--muted); font-size: 1.04rem; }
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 22px;
+      margin-top: 28px;
+    }
+    footer {
+      border-top: 1px solid var(--line);
+      padding: 24px 20px 40px;
+      color: var(--muted);
+      text-align: center;
+    }
+  </style>
 </head>
 <body>
-
-<nav>
-  <div class="nav-row">
-    <div class="wordmark"><span class="dot"></span>AWESOME PHONE</div>
-    <div class="links">
-      <a href="index.html">Home</a>
-      <a href="#overview">Overview</a>
-      <a href="#switch">Kill Switch</a>
-      <a href="#camera">Camera</a>
-      <a href="awesomephone1.html">Awesome Phone 1</a>
-      <a href="shop.html">Shop</a>
-    </div>
-    <a href="shop.html" class="buy mono">SHOP_</a>
-  </div>
-</nav>
-
-<section class="hero" id="overview">
-  <div class="eyebrow mono">system status: privacy-first</div>
-  <h1>Privacy.</h1>
-  <div class="tagline">By default.</div>
-  <div class="links">
-    <a href="#compare">buy &gt;</a>
-    <a href="#switch">learn_more &gt;</a>
-  </div>
-
-  <div class="scope">
-    <div class="scope-label"><span>RF / MIC signal trace</span><span id="scopeState">FLATLINE</span></div>
-    <div class="scope-box">
-      <svg viewBox="0 0 300 60" width="100%" height="40">
-        <path id="scopePath" class="scope-path" d="M0,30 L300,30" stroke-dasharray="200" />
-      </svg>
-    </div>
-  </div>
-
-  <div class="phone-wrap">
-    <svg class="phone" viewBox="0 0 300 620" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <linearGradient id="screenGrad" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stop-color="#141516"/>
-          <stop offset="100%" stop-color="#000"/>
-        </linearGradient>
-        <linearGradient id="bodyGrad" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stop-color="#33363a"/>
-          <stop offset="100%" stop-color="#09090a"/>
-        </linearGradient>
-      </defs>
-      <rect x="4" y="4" width="292" height="612" rx="52" fill="url(#bodyGrad)"/>
-      <rect x="14" y="14" width="272" height="592" rx="42" fill="url(#screenGrad)"/>
-      <circle cx="150" cy="42" r="6" fill="#111" stroke="#2c2c2e" stroke-width="1"/>
-      <rect x="118" y="590" width="64" height="5" rx="2.5" fill="#3a3a3c"/>
-    </svg>
-  </div>
-
-  <div class="switch-row">
-    <div class="switch-track" id="switchTrack" role="button" tabindex="0" aria-label="Toggle privacy kill switch"><div class="switch-knob"></div></div>
-    <div class="switch-status mono" id="switchStatus">radios offline</div>
-  </div>
-</section>
-
-<section id="switch">
-  <div class="inner feature reveal">
-    <div class="eyebrow mono">hardware, not software</div>
-    <h2>The switch that means it.</h2>
-    <p class="lede">A physical slide switch on the left rail sits inline with the Wi-Fi, cellular, Bluetooth, and microphone circuits. Flip it, and those pathways are cut before any chip or OS ever sees a signal.</p>
-
-    <div class="rail-visual">
-      <svg class="rail" viewBox="0 0 160 340" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <linearGradient id="railBody" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stop-color="#2c2e31"/>
-            <stop offset="100%" stop-color="#050506"/>
-          </linearGradient>
-        </defs>
-        <rect x="4" y="4" width="152" height="332" rx="38" fill="url(#railBody)" stroke="#2c2e31" stroke-width="1"/>
-        <rect x="0" y="58" width="6" height="28" rx="3" fill="#39ff88"/>
-        <rect x="0" y="104" width="6" height="36" rx="3" fill="#4a4d51"/>
-        <rect x="0" y="150" width="6" height="36" rx="3" fill="#4a4d51"/>
-        <rect x="0" y="206" width="6" height="14" rx="3" fill="#4a4d51"/>
-        <circle cx="80" cy="46" r="14" fill="#000" stroke="#2c2e31" stroke-width="1"/>
-      </svg>
-    </div>
-  </div>
-</section>
-
-<section class="light">
-  <div class="inner feature reveal">
-    <div class="eyebrow mono">tensor, inside</div>
-    <h2>Serious silicon. No compromise on speed.</h2>
-    <p class="lede">Awesome Phone 1 runs on the Tensor G2 platform. Awesome Phone 1a runs first-generation Tensor. Same privacy architecture, different budget.</p>
-    <div class="camera-visual">
-      <svg width="220" height="220" viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg">
-        <rect x="30" y="30" width="160" height="160" rx="18" fill="#0d0f0e"/>
-        <rect x="50" y="50" width="120" height="120" rx="10" fill="#000"/>
-        <g stroke="#39ff88" stroke-width="2">
-          <line x1="10" y1="70" x2="30" y2="70"/><line x1="10" y1="110" x2="30" y2="110"/><line x1="10" y1="150" x2="30" y2="150"/>
-          <line x1="190" y1="70" x2="210" y2="70"/><line x1="190" y1="110" x2="210" y2="110"/><line x1="190" y1="150" x2="210" y2="150"/>
-          <line x1="70" y1="10" x2="70" y2="30"/><line x1="110" y1="10" x2="110" y2="30"/><line x1="150" y1="10" x2="150" y2="30"/>
-          <line x1="70" y1="190" x2="70" y2="210"/><line x1="110" y1="190" x2="110" y2="210"/><line x1="150" y1="190" x2="150" y2="210"/>
-        </g>
-      </svg>
-    </div>
-  </div>
-</section>
-
-<section id="camera">
-  <div class="inner feature reveal">
-    <div class="eyebrow mono">see more. miss less</div>
-    <h2>Now with Wide.</h2>
-    <p class="lede">Awesome Phone 1 adds a second camera alongside the main sensor — a wide lens for tighter interiors and group shots. Awesome Phone 1a keeps the single-camera cutout.</p>
-
-    <div class="camera-visual">
-      <div class="camera-block">
-        <svg class="cam-pop" width="120" height="140" viewBox="0 0 120 140" xmlns="http://www.w3.org/2000/svg">
-          <rect x="4" y="4" width="112" height="132" rx="26" fill="#0d0f0e" stroke="#2c2e31" stroke-width="1"/>
-          <circle class="lens" cx="60" cy="70" r="30" fill="#000" stroke="#3a3d40" stroke-width="1.5"/>
-          <circle class="lens" cx="60" cy="70" r="18" fill="#111"/>
-          <circle class="lens glint" cx="52" cy="62" r="5" fill="#39ff88"/>
-        </svg>
-        <div class="label">AWESOME PHONE 1A · SINGLE</div>
-      </div>
-      <div class="camera-block">
-        <svg width="150" height="140" viewBox="0 0 150 140" xmlns="http://www.w3.org/2000/svg">
-          <rect class="cam-pop" x="4" y="4" width="142" height="132" rx="30" fill="#0d0f0e" stroke="#2c2e31" stroke-width="1"/>
-          <g class="cam-pop">
-            <circle class="lens" cx="55" cy="70" r="32" fill="#000" stroke="#3a3d40" stroke-width="1.5"/>
-            <circle class="lens" cx="55" cy="70" r="19" fill="#111"/>
-            <circle class="lens glint" cx="47" cy="61" r="5" fill="#39ff88"/>
-          </g>
-          <g class="cam-pop two">
-            <circle class="lens wide" cx="105" cy="70" r="22" fill="#000" stroke="#3a3d40" stroke-width="1.5"/>
-            <circle class="lens wide" cx="105" cy="70" r="13" fill="#111"/>
-            <circle class="lens wide glint" cx="99" cy="63" r="3.5" fill="#39ff88"/>
-          </g>
-        </svg>
-        <div class="label">AWESOME PHONE 1 · MAIN + WIDE</div>
+  <nav>
+    <div class="nav-inner">
+      <div class="brand">VERVEX</div>
+      <div class="links">
+        <a href="index.html">Home</a>
+        <a href="work.html">Work</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
       </div>
     </div>
-  </div>
-</section>
+  </nav>
 
-<section id="compare">
-  <div class="inner reveal">
-    <div class="feature">
-      <div class="eyebrow mono">which is right for you</div>
-      <h2>Compare the lineup.</h2>
-      <p class="lede">Both phones ship with GrapheneOS pre-installed. Both are open-source and can be built at home.</p>
+  <main>
+    <div class="eyebrow">project</div>
+    <h1>Plain project notes.</h1>
+    <p>This page is no longer a product page. It is just a direct project note and a clean way to keep the site honest.</p>
+
+    <div class="card">
+      <p>Small, useful work without the nonsense.</p>
     </div>
-    <div class="compare-wrap">
-      <table class="spec-table">
-        <thead><tr><th></th><th class="col">Awesome Phone 1</th><th class="col">Awesome Phone 1a</th></tr></thead>
-        <tbody>
-          <tr><td class="row-label">Operating system</td><td class="col">GrapheneOS pre-installed</td><td class="col">GrapheneOS pre-installed</td></tr>
-          <tr><td class="row-label">Chipset</td><td class="col">Tensor G2</td><td class="col">Tensor (Gen 1)</td></tr>
-          <tr><td class="row-label">Hardware kill switch</td><td class="col"><span class="check">✓</span></td><td class="col"><span class="check">✓</span></td></tr>
-          <tr><td class="row-label">Dedicated power button</td><td class="col"><span class="check">✓</span></td><td class="col"><span class="check">✓</span></td></tr>
-          <tr><td class="row-label">Rear camera</td><td class="col">Main + Wide (dual cutout)</td><td class="col">Single cutout</td></tr>
-          <tr><td class="row-label">Charging indicator</td><td class="col"><span class="check">✓</span></td><td class="col"><span class="check">✓</span></td></tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-</section>
+  </main>
 
-<section id="unbox" class="light">
-  <div class="inner feature reveal">
-    <div class="eyebrow mono">what's inside</div>
-    <h2>In the box.</h2>
-    <div class="unbox-row stagger">
-      <div class="unbox-cell"><h4>Awesome Phone</h4><p>Your Awesome Phone 1 or 1a, fully assembled with the kill-switch rail installed.</p></div>
-      <div class="unbox-cell"><h4>USB-C Cable</h4><p>Braided USB-C to USB-C, built to outlast the charger it came with.</p></div>
-      <div class="unbox-cell"><h4>SIM Pin</h4><p>A precision metal pin, sized exactly to the Awesome Phone SIM tray.</p></div>
-    </div>
-  </div>
-</section>
-
-<section class="close-cta reveal">
-  <h2>Awesome Phone 1.<br>Privacy. By default.</h2>
-  <div class="links"><a href="#compare">buy &gt;</a><a href="#switch">learn_more &gt;</a></div>
-</section>
-
-<footer>
-  <div class="footer-inner">
-    <div class="legal">
-      Both Awesome Phone 1 and Awesome Phone 1a ship with GrapheneOS pre-installed. Both are open-source and can be built at home. Specifications are subject to change. Kill switch severs Wi-Fi, cellular, Bluetooth, and microphone pathways at the hardware level.
-    </div>
-    <div class="footer-links">
-      <a href="index.html">Home</a><a href="#overview">Overview</a><a href="awesomephone1.html">Awesome Phone 1</a><a href="shop.html">Shop</a>
-    </div>
-  </div>
-</footer>
-
-<div class="signal-strip">
-  <div class="signal-strip-row">
-    <div class="seg" id="segRF"><span class="led"></span><span>RF</span></div>
-    <div class="seg" id="segMIC"><span class="led"></span><span>MIC</span></div>
-    <div class="seg"><span class="led"></span><span>LOC ALWAYS OFF</span></div>
-  </div>
-</div>
-
-<script>
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('in'); });
-  }, { threshold: 0.15 });
-  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-  const track = document.getElementById('switchTrack');
-  const status = document.getElementById('switchStatus');
-  const scopeState = document.getElementById('scopeState');
-  const scopePath = document.getElementById('scopePath');
-  const segRF = document.getElementById('segRF');
-  const segMIC = document.getElementById('segMIC');
-  let on = false;
-
-  function setState(){
-    track.classList.toggle('on', on);
-    status.textContent = on ? 'radios online' : 'radios offline';
-    scopeState.textContent = on ? 'LIVE' : 'FLATLINE';
-    scopeState.style.color = on ? 'var(--on)' : 'var(--off)';
-    scopePath.classList.toggle('live', on);
-    scopePath.setAttribute('d', on
-      ? 'M0,30 L20,30 L30,10 L40,50 L50,15 L60,30 L80,30 L90,45 L100,15 L110,30 L130,30 L140,8 L150,52 L160,30 L300,30'
-      : 'M0,30 L300,30');
-    segRF.classList.toggle('live', on);
-    segMIC.classList.toggle('live', on);
-  }
-  track.addEventListener('click', () => { on = !on; setState(); });
-  track.addEventListener('keydown', (e) => { if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); on = !on; setState(); } });
-  setState();
-</script>
-
+  <footer>
+    Vervex — no fake product language.
+  </footer>
 </body>
 </html>
