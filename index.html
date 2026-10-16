@@ -3,183 +3,78 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="theme-color" content="#102e6c">
-    <meta name="description" content="A little corner of the internet is under construction. Check back soon!">
-    <title>Under Construction</title>
+    <meta name="theme-color" content="#070b19">
+    <meta name="description" content="Spectacle Plasma is an independent KDE Plasma fork for desktops and TheAwesomePhone devices.">
+    <title>Spectacle Plasma — Your space, your way</title>
     <style>
-      :root {
-        color-scheme: light;
-        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-        font-synthesis: none;
-        text-rendering: optimizeLegibility;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-      }
-
-      * {
-        box-sizing: border-box;
-      }
-
-      body {
-        min-width: 320px;
-        min-height: 100svh;
-        margin: 0;
-        display: grid;
-        place-items: center;
-        overflow: hidden;
-        padding: 24px;
-        color: #102e6c;
-        background: #167fc0 url("fishy.png") center / cover fixed;
-      }
-
-      body::before {
-        position: fixed;
-        inset: 0;
-        content: "";
-        background: linear-gradient(135deg, rgb(10 42 103 / 38%), rgb(6 77 133 / 18%) 55%, rgb(34 24 101 / 38%));
-      }
-
-      main {
-        position: relative;
-        width: min(100%, 560px);
-        padding: clamp(32px, 7vw, 64px) clamp(24px, 7vw, 60px);
-        border: 1px solid rgb(255 255 255 / 70%);
-        border-radius: 28px;
-        background: rgb(255 255 255 / 91%);
-        box-shadow: 0 24px 80px rgb(8 29 83 / 35%);
-        text-align: center;
-        backdrop-filter: blur(12px);
-        animation: surface-in 700ms cubic-bezier(.2, .75, .25, 1) both;
-      }
-
-      .mark {
-        display: grid;
-        width: 88px;
-        height: 88px;
-        margin: 0 auto 26px;
-        place-items: center;
-        border: 1px solid #ffdf7b;
-        border-radius: 26px;
-        background: #fff5d6;
-        font-size: 22px;
-        font-weight: 800;
-        letter-spacing: 0.08em;
-        transform: rotate(-5deg);
-      }
-
-      .eyebrow {
-        margin: 0 0 12px;
-        color: #3563ae;
-        font-size: 0.76rem;
-        font-weight: 800;
-        letter-spacing: 0.18em;
-        text-transform: uppercase;
-      }
-
-      h1 {
-        margin: 0;
-        font-size: clamp(2.4rem, 9vw, 4.5rem);
-        font-weight: 850;
-        letter-spacing: -0.065em;
-        line-height: 0.98;
-      }
-
-      .message {
-        max-width: 350px;
-        margin: 20px auto 0;
-        color: #4b5c7a;
-        font-size: clamp(1rem, 3vw, 1.125rem);
-        line-height: 1.65;
-      }
-
-      .divider {
-        width: 54px;
-        height: 4px;
-        margin: 28px auto 20px;
-        border-radius: 99px;
-        background: linear-gradient(90deg, #ffb54a, #ff7599);
-      }
-
-      .social-links {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 12px;
-        justify-content: center;
-        margin-top: 22px;
-      }
-
-      .social-link {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        padding: 0.8rem 1.2rem;
-        border: 1px solid #cfe0ff;
-        border-radius: 999px;
-        background: #edf4ff;
-        color: #163d86;
-        font-size: 0.92rem;
-        font-weight: 700;
-        text-decoration: none;
-        transition: transform 180ms ease, box-shadow 180ms ease;
-      }
-
-      .social-link:hover,
-      .social-link:focus-visible {
-        transform: translateY(-1px);
-        box-shadow: 0 8px 22px rgb(22 61 134 / 15%);
-      }
-
-      .footer {
-        margin: 18px 0 0;
-        color: #71809a;
-        font-size: 0.85rem;
-        font-weight: 600;
-      }
-
-      @keyframes surface-in {
-        from {
-          opacity: 0;
-          transform: translateY(18px) scale(0.98);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0) scale(1);
-        }
-      }
-
-      @media (max-width: 480px) {
-        body {
-          padding: 18px;
-          background-attachment: scroll;
-        }
-
-        main {
-          border-radius: 24px;
-        }
-      }
-
-      @media (prefers-reduced-motion: reduce) {
-        *, *::before, *::after {
-          animation-duration: 0.01ms !important;
-          animation-iteration-count: 1 !important;
-          scroll-behavior: auto !important;
-        }
-      }
+      :root { color-scheme: dark; font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-synthesis: none; text-rendering: optimizeLegibility; -webkit-font-smoothing: antialiased; }
+      * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+      body { min-width: 320px; margin: 0; overflow-x: hidden; color: #f7f8ff; background: #070b19; }
+      a { color: inherit; }
+      .shell { width: min(100% - 40px, 1180px); margin: 0 auto; }
+      .site-header { position: absolute; z-index: 4; top: 0; right: 0; left: 0; padding: 22px 0; }
+      .nav { display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+      .brand { display: inline-flex; align-items: center; gap: 10px; font-size: .94rem; font-weight: 800; letter-spacing: .08em; text-decoration: none; text-transform: uppercase; }
+      .brand-mark { display: grid; width: 34px; height: 34px; place-items: center; border: 1px solid rgb(255 255 255 / 32%); border-radius: 10px; background: linear-gradient(135deg, #a8d8ff, #786fff); color: #11132b; font-weight: 900; }
+      .nav-links { display: flex; gap: 26px; margin-left: auto; color: #c6ccdf; font-size: .88rem; font-weight: 650; }
+      .nav-links a { text-decoration: none; transition: color 160ms ease; }
+      .nav-links a:hover { color: #fff; }
+      .nav-cta, .button { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: 0 17px; border: 1px solid rgb(255 255 255 / 24%); border-radius: 999px; background: rgb(255 255 255 / 9%); color: #fff; font-size: .86rem; font-weight: 750; text-decoration: none; transition: transform 180ms ease, background 180ms ease; }
+      .nav-cta:hover, .button:hover { transform: translateY(-2px); background: rgb(255 255 255 / 17%); }
+      .hero { position: relative; isolation: isolate; min-height: 720px; padding: 170px 0 80px; overflow: hidden; background: #0b1030 url("fishy.png") center / cover no-repeat; }
+      .hero::before { position: absolute; z-index: -1; inset: 0; content: ""; background: linear-gradient(90deg, rgb(5 8 26 / 93%) 0%, rgb(7 10 30 / 76%) 42%, rgb(5 8 26 / 18%)), linear-gradient(0deg, #070b19, transparent 35%); }
+      .hero::after { position: absolute; z-index: -1; top: 8%; right: 7%; width: 420px; height: 420px; content: ""; border-radius: 50%; background: #825eff; filter: blur(130px); opacity: .3; }
+      .hero-content { max-width: 690px; animation: rise .8s .1s both; }
+      .kicker { display: inline-flex; align-items: center; gap: 8px; margin: 0 0 21px; color: #bbeaff; font-size: .74rem; font-weight: 800; letter-spacing: .17em; text-transform: uppercase; }
+      .kicker::before { width: 8px; height: 8px; content: ""; border-radius: 50%; background: #9c89ff; box-shadow: 0 0 0 5px rgb(156 137 255 / 18%); }
+      h1, h2, p { margin-top: 0; }
+      h1 { max-width: 690px; margin-bottom: 24px; font-size: clamp(3.35rem, 8vw, 6.7rem); font-weight: 800; letter-spacing: -.075em; line-height: .91; text-wrap: balance; }
+      .gradient-text { background: linear-gradient(100deg, #a9e9ff, #b5a6ff 70%); background-clip: text; -webkit-background-clip: text; color: transparent; }
+      .lead { max-width: 560px; margin-bottom: 31px; color: #d4d9ed; font-size: clamp(1rem, 2vw, 1.15rem); line-height: 1.7; }
+      .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+      .button.primary { border-color: transparent; background: #f7f8ff; color: #101429; }
+      .button.primary:hover { background: #c8efff; }
+      .button svg { width: 16px; height: 16px; margin-left: 8px; fill: none; stroke: currentColor; stroke-width: 2; }
+      .section { padding: 112px 0; }
+      .section-heading { max-width: 620px; margin-bottom: 48px; }
+      .section-label { margin-bottom: 13px; color: #9fa9ff; font-size: .74rem; font-weight: 800; letter-spacing: .17em; text-transform: uppercase; }
+      h2 { margin-bottom: 16px; font-size: clamp(2.3rem, 5vw, 4rem); font-weight: 760; letter-spacing: -.06em; line-height: .98; }
+      .section-copy { margin-bottom: 0; color: #aab2ca; font-size: 1.04rem; line-height: 1.65; }
+      .products { background: linear-gradient(180deg, #070b19, #0b1030 50%, #070b19); }
+      .product-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; }
+      .product-card { position: relative; min-height: 540px; padding: 34px; overflow: hidden; border: 1px solid rgb(255 255 255 / 12%); border-radius: 26px; background: linear-gradient(145deg, #202755, #111735 65%, #0d1129); }
+      .product-card.alt { background: linear-gradient(145deg, #153449, #10202f 63%, #0d1129); }
+      .product-card::after { position: absolute; right: -70px; bottom: -125px; width: 330px; height: 510px; content: ""; border: 9px solid rgb(235 244 255 / 85%); border-radius: 45px; background: linear-gradient(145deg, #171d4a, #7874e7 55%, #b1effe); box-shadow: 0 26px 60px rgb(0 0 0 / 40%), inset 0 0 0 4px #070b19; transform: rotate(-14deg); }
+      .product-card.alt::after { right: -37px; border-color: rgb(207 246 255 / 88%); background: linear-gradient(145deg, #073c53, #14869c 55%, #95e9d4); transform: rotate(13deg); }
+      .product-card > * { position: relative; z-index: 1; }
+      .product-number { margin-bottom: 45px; color: rgb(255 255 255 / 58%); font-size: .75rem; font-weight: 750; letter-spacing: .14em; text-transform: uppercase; }
+      .product-name { margin-bottom: 10px; font-size: clamp(2.1rem, 4vw, 3.4rem); font-weight: 780; letter-spacing: -.065em; }
+      .product-description { max-width: 260px; color: #d4daf0; font-size: .99rem; line-height: 1.55; }
+      .product-link { display: inline-flex; align-items: center; gap: 8px; margin-top: 20px; font-size: .88rem; font-weight: 750; text-decoration: none; }
+      .product-link span { font-size: 1.25rem; transition: transform 160ms ease; }.product-link:hover span { transform: translateX(4px); }
+      .feature-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+      .feature { padding: 27px; border: 1px solid rgb(255 255 255 / 10%); border-radius: 18px; background: #0d1227; }
+      .feature-icon { display: grid; width: 38px; height: 38px; margin-bottom: 37px; place-items: center; border-radius: 12px; background: #252a58; color: #b8e8ff; font-size: 1.05rem; }
+      .feature h3 { margin: 0 0 9px; font-size: 1.1rem; letter-spacing: -.025em; }.feature p { margin: 0; color: #9da7c2; font-size: .92rem; line-height: 1.6; }
+      .community { padding: 50px 0 100px; }
+      .community-card { display: flex; align-items: center; justify-content: space-between; gap: 28px; padding: clamp(32px, 6vw, 64px); overflow: hidden; border-radius: 26px; background: linear-gradient(110deg, #7f6def, #3ba5cb); }
+      .community-card h2 { max-width: 520px; margin-bottom: 10px; }.community-card p { max-width: 480px; margin: 0; color: #e3e9ff; line-height: 1.6; }.community-card .button { flex: 0 0 auto; border-color: transparent; background: #0a1230; }
+      footer { padding: 25px 0 34px; border-top: 1px solid rgb(255 255 255 / 10%); color: #838da9; font-size: .79rem; }.footer-content { display: flex; justify-content: space-between; gap: 16px; }.footer-content a { text-decoration: none; }.footer-content a:hover { color: #fff; }
+      @keyframes rise { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+      @media (max-width: 760px) { .nav-links { display: none; } .hero { min-height: 670px; }.product-grid, .feature-grid { grid-template-columns: 1fr; }.product-card { min-height: 460px; }.section { padding: 80px 0; }.community-card { align-items: flex-start; flex-direction: column; }.community { padding-bottom: 74px; } }
+      @media (max-width: 470px) { .shell { width: min(100% - 32px, 1180px); }.site-header { padding-top: 16px; }.nav-cta { padding-inline: 13px; font-size: .79rem; }.brand { font-size: .76rem; }.hero { padding-top: 138px; }.product-card { padding: 26px; }.footer-content { flex-direction: column; } }
+      @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; } }
     </style>
   </head>
   <body>
-    <main>
-      <div class="mark" aria-hidden="true">UPD</div>
-      <p class="eyebrow">YeS</p>
-      <h1>Under<br>construction</h1>
-      <p class="message">We’re making a few waves behind the scenes. This little corner of the internet will be ready to swim soon.</p>
-      <div class="social-links">
-        <a class="social-link" href="https://discord.gg/cCvy77sVkE" target="_blank" rel="noreferrer">Discord</a>
-        <a class="social-link" href="https://github.com/penguinwho" target="_blank" rel="noreferrer">GitHub</a>
-        <a class="social-link" href="https://bsky.app/profile/vervex.hu" target="_blank" rel="noreferrer">Bluesky</a>
-      </div>
-      <div class="divider" aria-hidden="true"></div>
-      <p class="footer">Thanks for stopping by!</p>
+    <header class="site-header"><nav class="nav shell" aria-label="Main navigation"><a class="brand" href="index.html"><span class="brand-mark">S</span> Spectacle Plasma</a><div class="nav-links"><a href="phones.html">Phones</a><a href="desktop.html">Desktop</a><a href="#community">Community</a></div><a class="nav-cta" href="https://discord.gg/cCvy77sVkE" target="_blank" rel="noreferrer">Join the community</a></nav></header>
+    <main id="top">
+      <section class="hero"><div class="shell hero-content"><p class="kicker">Independent KDE Plasma fork</p><h1>Your space, <span class="gradient-text">your way.</span></h1><p class="lead">Spectacle Plasma brings a focused, expressive desktop to the devices you use every day—starting with a new take on the Linux desktop and TheAwesomePhone.</p><div class="hero-actions"><a class="button primary" href="phones.html">Meet the devices <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M14 7l5 5-5 5"/></svg></a><a class="button" href="desktop.html">Explore the desktop</a></div></div></section>
+      <section class="section products" id="phones"><div class="shell"><div class="section-heading"><p class="section-label">TheAwesomePhone family</p><h2>Made for the moments that matter.</h2><p class="section-copy">A new family of phones, designed to feel at home with your desktop and fit naturally in your hand.</p></div><div class="product-grid"><article class="product-card"><p class="product-number">01 / Flagship</p><h3 class="product-name">TheAwesomePhone 1</h3><p class="product-description">The phone for people who want more from their everyday technology.</p><a class="product-link" href="phones.html#phone-1">Explore phone <span>→</span></a></article><article class="product-card alt"><p class="product-number">01a / Essential</p><h3 class="product-name">TheAwesomePhone 1a</h3><p class="product-description">A thoughtful, approachable entry point into the Spectacle experience.</p><a class="product-link" href="phones.html#phone-1a">Explore phone <span>→</span></a></article></div></div></section>
+      <section class="section" id="experience"><div class="shell"><div class="section-heading"><p class="section-label">Spectacle experience</p><h2>A familiar foundation with a fresh point of view.</h2></div><div class="feature-grid"><article class="feature"><div class="feature-icon">✦</div><h3>Personal by default</h3><p>Shape your workspace around how you think, work, and create—not the other way around.</p></article><article class="feature"><div class="feature-icon">⌘</div><h3>Connected devices</h3><p>One coherent experience across your computer and TheAwesomePhone, with your work close at hand.</p></article><article class="feature"><div class="feature-icon">◌</div><h3>Open at heart</h3><p>Built on KDE Plasma and the Linux ecosystem, with room for the community to help define what comes next.</p></article></div><p style="margin: 30px 0 0;"><a class="button" href="desktop.html">Explore Spectacle Plasma</a></p></div></section>
+      <section class="community" id="community"><div class="shell"><div class="community-card"><div><p class="section-label">Join early</p><h2>Help make the desktop more spectacular.</h2><p>Follow the project, share your ideas, and be first to hear when there’s something new to try.</p></div><a class="button" href="https://discord.gg/cCvy77sVkE" target="_blank" rel="noreferrer">Join Discord</a></div></div></section>
     </main>
+    <footer><div class="shell footer-content"><span>© 2026 Spectacle Plasma</span><span><a href="https://github.com/penguinwho" target="_blank" rel="noreferrer">GitHub</a> · <a href="https://bsky.app/profile/vervex.hu" target="_blank" rel="noreferrer">Bluesky</a></span></div></footer>
   </body>
 </html>
